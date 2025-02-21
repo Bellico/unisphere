@@ -172,7 +172,6 @@ csharp_space_between_parentheses = false
 csharp_space_between_square_brackets = false
 
 # License header
-file_header_template = Licensed to the .NET Foundation under one or more agreements.\nThe .NET Foundation licenses this file to you under the MIT license.
 csharp_style_namespace_declarations = block_scoped:silent
 csharp_style_prefer_method_group_conversion = true:silent
 csharp_style_prefer_top_level_statements = true:silent
@@ -186,13 +185,28 @@ csharp_style_prefer_utf8_string_literals = true:suggestion
 csharp_style_deconstructed_variable_declaration = true:suggestion
 csharp_style_unused_value_assignment_preference = discard_variable:suggestion
 
+# .NET Code Analyzers rules
+
 # CA2007: Consider calling ConfigureAwait on the awaited task
 dotnet_diagnostic.CA2007.severity = none
-
-# C++ Files
-
 # Default severity for analyzer diagnostics with category 'Reliability'
 dotnet_analyzer_diagnostic.category-Reliability.severity = none
+# CS8618: Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+dotnet_diagnostic.CS8618.severity = none
+# CA1040: Avoid empty interfaces
+dotnet_diagnostic.CA1040.severity = none
+# SA1402: File may only contain a single type
+dotnet_diagnostic.S3251.severity = none
+# SA1600: Elements should be documented
+dotnet_diagnostic.SA1600.severity = none
+# SA1200: Using directive must appear within a namespace declaration
+dotnet_diagnostic.SA1200.severity = none
+# SA1101: Prefix local calls with 'this.'
+dotnet_diagnostic.SA1101.severity = none
+# CS8629: Nullable value type may be null.
+dotnet_diagnostic.CS8629.severity = none
+# SA1204: Static elements should appear before instance elements
+dotnet_diagnostic.SA1204.severity = none
 
 [*.{cpp,h,in}]
 curly_bracket_next_line = true

@@ -1,12 +1,12 @@
 {
   "profiles": {
-    "Unisphere.Identity": {
+    "Unisphere.Identity.Api": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:51453;http://localhost:51454"
+      "applicationUrl": "https://localhost:58774;http://localhost:58776"
     }
   }
 }

@@ -1,16 +1,56 @@
-using Unisphere.Explorer.Services;
+using Unisphere.Explorer.Api;
+using Unisphere.Explorer.Api.Endpoints;
+using Unisphere.Explorer.Api.Middlewares;
+using Unisphere.Explorer.Api.RpcServices;
+using Unisphere.Explorer.Application;
+using Unisphere.Explorer.Infrastructure;
+using Unisphere.ServiceDefaults.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddGrpc();
+builder.AddServiceDefaults();
 
-builder.Services.AddSingleton<GreeterService>();
+builder.Services
+    .RegisterPresentationServices()
+    .RegisterApplicationServices()
+    .RegisterInfrastructureServices();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-app.MapGrpcService<GreeterService>();
-app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
+app.MapDefaultEndpoints();
+
+app.MapExplorerEndpoints();
+
+app.UseMiddleware<RequestContextLoggingMiddleware>();
+
+app.MapGrpcService<ExplorerRpcService>();
+
+app.UseExceptionHandler();
 
 await app.RunAsync();
+
+//builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
+
+//builder.Services.AddSwaggerGenWithAuth();
+//builder.Services.AddEndpointsApiExplorer();
+//builder.Services.AddSwaggerGen();
+
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwaggerWithUi();
+
+//    app.ApplyMigrations();
+//}
+
+//app.MapHealthChecks("health", new HealthCheckOptions
+//{
+//    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+//});
+
+//app.UseRequestContextLogging();
+
+//app.UseSerilogRequestLogging();
+
+//app.UseAuthentication();
+
+//app.UseAuthorization();

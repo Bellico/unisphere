@@ -12,4 +12,9 @@
     <PackageReference Include="Aspire.Hosting.AppHost" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Unisphere.Explorer\src\Unisphere.Explorer.Api\Unisphere.Explorer.Api.csproj" />
+    <ProjectReference Include="..\..\Unisphere.Gateway\src\Unisphere.Gateway.Api\Unisphere.Gateway.Api.csproj" />
+  </ItemGroup>
+
 </Project>

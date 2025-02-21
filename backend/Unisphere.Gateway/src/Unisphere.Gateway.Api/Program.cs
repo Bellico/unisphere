@@ -1,40 +1,43 @@
+using Microsoft.AspNetCore.RateLimiting;
+using Unisphere.Gateway.Api;
+using Unisphere.Gateway.Api.Middlewares;
+using Unisphere.ServiceDefaults.Extensions;
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-//builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
+builder.AddServiceDefaults();
 
-//builder.Services.AddSwaggerGenWithAuth();
+builder.Services.AddReverseProxy()
+               .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"))
+               .AddServiceDiscoveryDestinationResolver();
 
-builder.Services
-    .AddEndpointsApiExplorer();
-    //.AddSwaggerGen();
+builder.Services.AddRateLimiter(rateLimiterOptions =>
+{
+    rateLimiterOptions.AddFixedWindowLimiter("limited", options =>
+    {
+        options.Window = TimeSpan.FromSeconds(10);
+        options.PermitLimit = 5;
+    });
+});
 
-//builder.Services
-//    .AddApplication()
-//    .AddPresentation()
-//    .AddInfrastructure(builder.Configuration);
+builder.Services.AddGrpcClients();
 
-//builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
+builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddExceptionHandler<GrpcExceptionHandler>();
+
+builder.Services.AddProblemDetails();
 
 WebApplication app = builder.Build();
 
-//app.MapEndpoints();
-
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseSwaggerWithUi();
-
-//    app.ApplyMigrations();
-//}
-
-//app.MapHealthChecks("health", new HealthCheckOptions
-//{
-//    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-//});
+app
+    .MapDefaultEndpoints()
+    .MapExplorerEndpoints();
 
 app.UseExceptionHandler();
 
-app.UseAuthentication();
+app.UseRateLimiter();
 
-app.UseAuthorization();
+app.MapReverseProxy();
 
 await app.RunAsync();

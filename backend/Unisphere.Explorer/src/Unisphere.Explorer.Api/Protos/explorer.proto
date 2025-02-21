@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "Unisphere.Explorer.Api.RpcServices";
+
+package explorer;
+
+service ExplorerService {
+  rpc GetHouseDetail (GetHouseRpcRequest) returns (GetHouseRpcResponse);
+  rpc GetError (Empty) returns (Empty);
+}
+
+message GetHouseRpcRequest {
+  string id = 1;
+}
+
+message GetHouseRpcResponse {
+  string id = 1;
+  string description = 2;
+}
+
+message Empty {}
