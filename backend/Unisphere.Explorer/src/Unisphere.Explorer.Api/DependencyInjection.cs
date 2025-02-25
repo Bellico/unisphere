@@ -1,17 +1,17 @@
-﻿using Unisphere.Explorer.Api.Middlewares;
+﻿using Shared.Presentation;
 
 namespace Unisphere.Explorer.Api;
 
-public static class DependencyInjection
+internal static class DependencyInjection
 {
     public static IServiceCollection RegisterPresentationServices(this IServiceCollection services)
     {
         services.AddGrpc(c => c.Interceptors.Add<GrpcGlobalExceptionHandlerInterceptor>());
 
         services.AddEndpointsApiExplorer();
+
         //services.AddSwaggerGen();
 
-        services.AddExceptionHandler<ValidationExceptionHandler>();
         services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddProblemDetails();
 

@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 using Grpc.Core;
 using Grpc.Core.Interceptors;
+using Microsoft.Extensions.Logging;
 
-namespace Unisphere.Explorer.Api.Middlewares;
+namespace Shared.Presentation;
 
-internal partial class GrpcGlobalExceptionHandlerInterceptor(
-    IHostEnvironment env,
+public partial class GrpcGlobalExceptionHandlerInterceptor(
     ILogger<GrpcGlobalExceptionHandlerInterceptor> logger)
     : Interceptor
 {
@@ -16,21 +16,17 @@ internal partial class GrpcGlobalExceptionHandlerInterceptor(
     {
         try
         {
-            return await base.UnaryServerHandler(request, context, continuation);
+            return await continuation(request, context);
         }
         catch (ValidationException validationException)
         {
-            var validationErrors = validationException.Errors
-                               .GroupBy(e => e.PropertyName)
-                               .ToDictionary(f => f.Key, f => f.ToList());
-
-            throw new RpcException(new Status(StatusCode.InvalidArgument, validationException.ToString()));
+            throw ProblemDetailHelper.CreateRpcException(validationException);
         }
         catch (Exception exception) when (exception is not RpcException)
         {
             LogExceptionError(logger, exception);
 
-            throw new RpcException(new Status(StatusCode.Internal, exception.ToString()));
+            throw ProblemDetailHelper.CreateRpcException(exception);
         }
     }
 

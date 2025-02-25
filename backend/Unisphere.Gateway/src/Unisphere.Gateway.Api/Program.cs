@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.RateLimiting;
+using Shared.Presentation;
 using Unisphere.Gateway.Api;
-using Unisphere.Gateway.Api.Middlewares;
 using Unisphere.ServiceDefaults.Extensions;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -24,17 +24,17 @@ builder.Services.AddGrpcClients();
 
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddExceptionHandler<GrpcExceptionHandler>();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 builder.Services.AddProblemDetails();
 
 WebApplication app = builder.Build();
 
+app.UseExceptionHandler();
+
 app
     .MapDefaultEndpoints()
     .MapExplorerEndpoints();
-
-app.UseExceptionHandler();
 
 app.UseRateLimiter();
 

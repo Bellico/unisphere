@@ -1,6 +1,7 @@
 using Grpc.Core;
 using Mapster;
 using MediatR;
+using Shared.Presentation;
 using Unisphere.Explorer.Application.Queries;
 
 namespace Unisphere.Explorer.Api.RpcServices;
@@ -22,7 +23,7 @@ internal class ExplorerRpcService(ISender sender) : ExplorerService.ExplorerServ
 
             return result.Match(
                       success => success.Adapt<GetHouseRpcResponse>(),
-                      errors => throw GrpcCustomResults.Problem(errors)
+                      errors => throw ProblemDetailHelper.RpcProblem(errors)
                   );
         }
         else

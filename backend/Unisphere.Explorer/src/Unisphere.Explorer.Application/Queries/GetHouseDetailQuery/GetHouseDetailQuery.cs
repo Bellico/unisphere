@@ -3,4 +3,7 @@ using Unisphere.Explorer.Application.Models;
 
 namespace Unisphere.Explorer.Application.Queries;
 
-public sealed record GetHouseDetailQuery(Guid? HouseId) : IQueryErrorOr<HouseModel>;
+public sealed record GetHouseDetailQuery(Guid? HouseId) : IQueryErrorOr<HouseModel>
+{
+  public string? Description { get; set; }
+}

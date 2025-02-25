@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Shared.Presentation;
 using Unisphere.Explorer.Application.Queries;
 
 namespace Unisphere.Explorer.Api.Endpoints;
@@ -18,7 +19,7 @@ internal static class ExplorerEndpoints
 
             var result = await sender.Send(command, cancellationToken);
 
-            return result.Match(Results.Ok, CustomResults.Problem);
+            return result.Match(Results.Ok, ProblemDetailHelper.Problem);
         });
 
         return app;

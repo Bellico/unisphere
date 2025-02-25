@@ -4,11 +4,7 @@ namespace Unisphere.Explorer.Domain;
 
 public static class HouseErrors
 {
-    public static Error NotFound(Guid userId) => Error.NotFound(
-        "Users.NotFound",
-        $"The user with the Id = '{userId}' was not found");
-
-    public static Error Unauthorized() => Error.Failure(
+    public static readonly Error Unauthorized = Error.Failure(
         "Users.Unauthorized",
         "You are not authorized to perform this action.");
 
@@ -19,4 +15,8 @@ public static class HouseErrors
     public static readonly Error EmailNotUnique = Error.Conflict(
         "Users.EmailNotUnique",
         "The provided email is not unique");
+
+    public static Error NotFound(Guid userId) => Error.NotFound(
+        "Users.NotFound",
+        $"The user with the Id = '{userId}' was not found");
 }

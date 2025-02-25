@@ -17,6 +17,8 @@ builder.Services
 
 var app = builder.Build();
 
+app.UseExceptionHandler();
+
 app.MapDefaultEndpoints();
 
 app.MapExplorerEndpoints();
@@ -24,8 +26,6 @@ app.MapExplorerEndpoints();
 app.UseMiddleware<RequestContextLoggingMiddleware>();
 
 app.MapGrpcService<ExplorerRpcService>();
-
-app.UseExceptionHandler();
 
 await app.RunAsync();
 

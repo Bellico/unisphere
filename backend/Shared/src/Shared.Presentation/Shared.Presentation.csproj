@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" />
-    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
+    <PackageReference Include="Grpc.Core.Api" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.Middleware" />
+    <PackageReference Include="FluentValidation" />
+    <PackageReference Include="ErrorOr" />
   </ItemGroup>
   
 </Project>

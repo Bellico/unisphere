@@ -1,6 +1,4 @@
 ﻿using FluentValidation;
-using MediatR;
-using MediatR.Pipeline;
 using Microsoft.Extensions.DependencyInjection;
 using Unisphere.Explorer.Application.Behaviors;
 
@@ -20,6 +18,6 @@ public static class DependencyInjection
             config.AddOpenRequestPreProcessor(typeof(RequestValidationPreProcessor<>));
         });
 
-        return services; 
+        return services;
     }
 }

@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\src\Shared.Presentation\Shared.Presentation.csproj" />
     <ProjectReference Include="..\..\..\Unisphere\Unisphere.ServiceDefaults\Unisphere.ServiceDefaults.csproj" />
     <ProjectReference Include="..\Unisphere.Explorer.Application\Unisphere.Explorer.Application.csproj" />
     <ProjectReference Include="..\Unisphere.Explorer.Infrastructure\Unisphere.Explorer.Infrastructure.csproj" />
