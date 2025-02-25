@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.RateLimiting;
-using Shared.Presentation;
+using Unisphere.Core.Presentation;
 using Unisphere.Gateway.Api;
 using Unisphere.ServiceDefaults.Extensions;
 

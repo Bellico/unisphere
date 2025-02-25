@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Shared.Presentation;
+using Unisphere.Core.Presentation;
 using Unisphere.Explorer.Application.Queries;
 
 namespace Unisphere.Explorer.Api.Endpoints;

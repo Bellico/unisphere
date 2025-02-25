@@ -10,4 +10,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Unisphere.Explorer.Domain\Unisphere.Explorer.Domain.csproj" />
   </ItemGroup>
+  
 </Project>

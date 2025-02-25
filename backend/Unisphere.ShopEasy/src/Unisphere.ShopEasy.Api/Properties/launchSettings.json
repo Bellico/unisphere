@@ -1,12 +1,11 @@
 {
-  "profiles": {
-    "Unisphere.ShopEasy.Api": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:58775;http://localhost:58777"
+    "profiles": {
+        "Unisphere.ShopEasy.Api": {
+            "commandName": "Project",
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "applicationUrl": "https://localhost:58775;http://localhost:58777"
+        }
     }
-  }
 }

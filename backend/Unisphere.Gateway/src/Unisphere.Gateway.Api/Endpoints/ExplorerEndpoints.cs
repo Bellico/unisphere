@@ -1,7 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-using Unisphere.Explorer.Api.RpcServices;
+﻿using Unisphere.Explorer.Api.RpcServices;
 
 namespace Unisphere.Gateway.Api;
 
@@ -25,9 +22,8 @@ internal static class ExplorerEndpoints
         .WithDescription("WithDescription toto")
         .Produces<string>(StatusCodes.Status201Created)
         .ProducesProblem(StatusCodes.Status400BadRequest);
-        //.RequirePermission("Permissions.Basket.Checkout")
-        //.RequireAuthorization();
-
+        // .RequirePermission("Permissions.Basket.Checkout")
+        // .RequireAuthorization();
         return app;
     }
 }

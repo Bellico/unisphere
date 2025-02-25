@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Shared.Presentation;
+namespace Unisphere.Core.Presentation;
 
 public partial class GlobalExceptionHandler(IHostEnvironment env, ILogger<GlobalExceptionHandler> logger)
     : IExceptionHandler

@@ -29,28 +29,20 @@ app.MapGrpcService<ExplorerRpcService>();
 
 await app.RunAsync();
 
-//builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
-
-//builder.Services.AddSwaggerGenWithAuth();
-//builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
-
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseSwaggerWithUi();
-
-//    app.ApplyMigrations();
-//}
-
-//app.MapHealthChecks("health", new HealthCheckOptions
-//{
+// builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
+// builder.Services.AddSwaggerGenWithAuth();
+// builder.Services.AddEndpointsApiExplorer();
+// builder.Services.AddSwaggerGen();
+// if (app.Environment.IsDevelopment())
+// {
+//     app.UseSwaggerWithUi();
+//     app.ApplyMigrations();
+// }
+// app.MapHealthChecks("health", new HealthCheckOptions
+// {
 //    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-//});
-
-//app.UseRequestContextLogging();
-
-//app.UseSerilogRequestLogging();
-
-//app.UseAuthentication();
-
-//app.UseAuthorization();
+// });
+// app.UseRequestContextLogging();
+// app.UseSerilogRequestLogging();
+// app.UseAuthentication();
+// app.UseAuthorization();

@@ -1,4 +1,4 @@
-﻿using Shared.Presentation;
+﻿using Unisphere.Core.Presentation;
 
 namespace Unisphere.Explorer.Api;
 
@@ -10,8 +10,7 @@ internal static class DependencyInjection
 
         services.AddEndpointsApiExplorer();
 
-        //services.AddSwaggerGen();
-
+        // services.AddSwaggerGen();
         services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddProblemDetails();
 

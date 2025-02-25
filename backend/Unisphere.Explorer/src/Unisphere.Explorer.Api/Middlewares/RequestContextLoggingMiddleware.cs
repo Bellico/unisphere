@@ -2,16 +2,19 @@
 
 namespace Unisphere.Explorer.Api.Middlewares;
 
-internal class RequestContextLoggingMiddleware(RequestDelegate next)
+internal sealed class RequestContextLoggingMiddleware(RequestDelegate next)
 {
     private const string CorrelationIdHeaderName = "Correlation-Id";
 
     public Task Invoke(HttpContext context)
     {
-        //using (LogContext.PushProperty("CorrelationId", GetCorrelationId(context)))
-        //{
-            return next.Invoke(context);
-        //}
+#pragma warning disable // Use explicit type
+        var x = GetCorrelationId(context);
+#pragma warning restore // Use explicit type
+                               // using (LogContext.PushProperty("CorrelationId", GetCorrelationId(context)))
+                               // {
+        return next.Invoke(context);
+        // }
     }
 
     private static string GetCorrelationId(HttpContext context)

@@ -5,14 +5,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 
-namespace Shared.Presentation;
+namespace Unisphere.Core.Presentation;
 
 public static partial class ProblemDetailHelper
 {
     private const string InternalServerErrorTitle = "An unhandled exception has occurred while executing the request";
     private const string BadRequestErrorTitle = "Bad Request";
 
-    private static readonly Dictionary<int, string> ProblemTypes = new ()
+    private static readonly Dictionary<int, string> ProblemTypes = new()
     {
         { 400, "https://tools.ietf.org/html/rfc7231#section-6.5.1" },
         { 401, "https://tools.ietf.org/html/rfc7235#section-3.1" },
@@ -52,7 +52,7 @@ public static partial class ProblemDetailHelper
                  .ToDictionary(f => f.Key, f => f.Select(u => u.ErrorMessage).ToList());
 
         var problemDetails = new ProblemDetails
-        {
+        { 
             Status = StatusCodes.Status400BadRequest,
             Type = ProblemTypes[StatusCodes.Status400BadRequest],
             Title = BadRequestErrorTitle,
@@ -90,6 +90,6 @@ public static partial class ProblemDetailHelper
               ErrorType.Conflict => StatusCodes.Status409Conflict,
               ErrorType.Forbidden => StatusCodes.Status403Forbidden,
               ErrorType.Unauthorized => StatusCodes.Status401Unauthorized,
-              _ => StatusCodes.Status500InternalServerError
+              _ => StatusCodes.Status500InternalServerError,
           };
 }

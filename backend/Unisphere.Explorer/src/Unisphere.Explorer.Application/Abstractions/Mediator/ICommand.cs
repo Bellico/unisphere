@@ -1,5 +1,5 @@
-﻿using MediatR;
-using ErrorOr;
+﻿using ErrorOr;
+using MediatR;
 
 namespace Unisphere.Explorer.Application.Abstractions;
 

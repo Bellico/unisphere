@@ -1,13 +1,12 @@
 ﻿using ErrorOr;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Unisphere.Explorer.Application.Abstractions;
 using Unisphere.Explorer.Application.Models;
 using Unisphere.Explorer.Domain;
 
 namespace Unisphere.Explorer.Application.Queries;
 
-internal sealed partial class GetHousesQueryHandler(IApplicationDbContext context, ILogger<GetHousesQueryHandler> logger) : IQueryErrorOrHandler<GetHousesQuery, List<HouseModel>>
+internal sealed partial class GetHousesQueryHandler(IApplicationDbContext context) : IQueryErrorOrHandler<GetHousesQuery, List<HouseModel>>
 {
     public async Task<ErrorOr<List<HouseModel>>> Handle(GetHousesQuery query, CancellationToken cancellationToken)
     {

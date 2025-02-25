@@ -200,12 +200,10 @@ dotnet_diagnostic.CA2007.severity = none
 dotnet_diagnostic.CS8618.severity = none
 # CA1040: Avoid empty interfaces
 dotnet_diagnostic.CA1040.severity = none
-# SA1402: File may only contain a single type
-dotnet_diagnostic.S3251.severity = none
+# CA1812: Avoid uninstantiated internal classes
+dotnet_diagnostic.CA1812.severity = none
 # SA1600: Elements should be documented
 dotnet_diagnostic.SA1600.severity = none
-# SA1200: Using directive must appear within a namespace declaration
-dotnet_diagnostic.SA1200.severity = none
 # SA1101: Prefix local calls with 'this.'
 dotnet_diagnostic.SA1101.severity = none
 # CS8629: Nullable value type may be null.
@@ -218,6 +216,24 @@ dotnet_diagnostic.SA1601.severity = none
 dotnet_diagnostic.CA1062.severity = none
 # CA1308: Normalize strings to uppercase
 dotnet_diagnostic.CA1308.severity = none
+# SA1202: Elements should be ordered by access
+dotnet_diagnostic.SA1202.severity = none
+# SA1201: Elements should appear in the correct order
+dotnet_diagnostic.SA1201.severity = none
+# SA1127: Generic type constraints should be on their own line
+dotnet_diagnostic.SA1127.severity = none
+# SA1515: Single-line comment should be preceded by blank line
+dotnet_diagnostic.SA1515.severity = none
+# S125: Sections of code should not be commented out
+dotnet_diagnostic.S125.severity = silent
+# SA1633: File should have header
+dotnet_diagnostic.SA1633.severity = none
+# SA1634: File header should not be present
+dotnet_diagnostic.SA0001.severity = none
+# SA1309: Field names should not begin with underscore
+dotnet_diagnostic.SA1309.severity = none
+# CA1724: Type names should not match namespaces
+dotnet_diagnostic.CA1724.severity = none
 
 [*.{cpp,h,in}]
 curly_bracket_next_line = true

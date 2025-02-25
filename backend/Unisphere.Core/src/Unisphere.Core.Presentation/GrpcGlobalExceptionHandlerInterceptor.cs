@@ -3,7 +3,7 @@ using Grpc.Core;
 using Grpc.Core.Interceptors;
 using Microsoft.Extensions.Logging;
 
-namespace Shared.Presentation;
+namespace Unisphere.Core.Presentation;
 
 public partial class GrpcGlobalExceptionHandlerInterceptor(
     ILogger<GrpcGlobalExceptionHandlerInterceptor> logger)

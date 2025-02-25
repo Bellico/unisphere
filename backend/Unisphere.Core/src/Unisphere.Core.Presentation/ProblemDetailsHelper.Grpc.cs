@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 
-namespace Shared.Presentation;
+namespace Unisphere.Core.Presentation;
 
 public static partial class ProblemDetailHelper
 {
@@ -95,7 +95,7 @@ public static partial class ProblemDetailHelper
         StatusCode.PermissionDenied => StatusCodes.Status403Forbidden,
         StatusCode.Unauthenticated => StatusCodes.Status401Unauthorized,
         StatusCode.Internal => StatusCodes.Status500InternalServerError,
-        _ => StatusCodes.Status500InternalServerError
+        _ => StatusCodes.Status500InternalServerError,
     };
 
     private static StatusCode MapHttpStatusToGrpc(int statusCode) => statusCode switch
@@ -105,6 +105,6 @@ public static partial class ProblemDetailHelper
         StatusCodes.Status403Forbidden => StatusCode.PermissionDenied,
         StatusCodes.Status401Unauthorized => StatusCode.Unauthenticated,
         StatusCodes.Status500InternalServerError => StatusCode.Internal,
-        _ => StatusCode.Internal
+        _ => StatusCode.Internal,
     };
 }

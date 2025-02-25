@@ -39,7 +39,7 @@
     <PackageVersion Include="Serilog.Sinks.Seq" Version="9.0.0" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.5.0.109200" />
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="7.2.0" />
-    <PackageVersion Include="StyleCop.Analyzers" Version="1.1.118" />
+    <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
     <PackageVersion Include="Yarp.ReverseProxy" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup Label="Testing">
