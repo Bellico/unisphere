@@ -14,7 +14,7 @@ internal sealed class ExplorerRpcService(ISender sender) : ExplorerService.Explo
         throw new InvalidOperationException("Error business data");
     }
 
-    public async override Task<GetHouseRpcResponse> GetHouseDetail(GetHouseRpcRequest request, ServerCallContext context)
+    public override async Task<GetHouseRpcResponse> GetHouseDetail(GetHouseRpcRequest request, ServerCallContext context)
     {
         var command = new GetHouseDetailQuery(request.Id.AsGuid());
 

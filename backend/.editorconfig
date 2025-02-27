@@ -234,6 +234,8 @@ dotnet_diagnostic.SA0001.severity = none
 dotnet_diagnostic.SA1309.severity = none
 # CA1724: Type names should not match namespaces
 dotnet_diagnostic.CA1724.severity = none
+# IDE1006: Naming Styles
+dotnet_diagnostic.IDE1006.severity = none
 
 [*.{cpp,h,in}]
 curly_bracket_next_line = true

@@ -52,7 +52,7 @@ public static partial class ProblemDetailHelper
                  .ToDictionary(f => f.Key, f => f.Select(u => u.ErrorMessage).ToList());
 
         var problemDetails = new ProblemDetails
-        { 
+        {
             Status = StatusCodes.Status400BadRequest,
             Type = ProblemTypes[StatusCodes.Status400BadRequest],
             Title = BadRequestErrorTitle,

@@ -1,8 +1,8 @@
 using Unisphere.Explorer.Api.RpcServices;
 
-namespace Unisphere.Gateway.Api;
+namespace Unisphere.Gateway.Api.Extensions;
 
-internal static class GrpcClients
+internal static class GrpcClientsExtensions
 {
     public static void AddGrpcClients(this IServiceCollection services)
     {

@@ -6,12 +6,14 @@ internal static class ExplorerEndpoints
 {
     public static IEndpointRouteBuilder MapExplorerEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapGet("/explorer/error", async (ExplorerService.ExplorerServiceClient explorerApiService) =>
+        var group = app.MapGroup("explorer");
+
+        group.MapGet("/explorer/error", async (ExplorerService.ExplorerServiceClient explorerApiService) =>
         {
             await explorerApiService.GetErrorAsync(new Empty());
         });
 
-        app.MapGet("/explorer/houses/{houseId:guid}", async (Guid houseId, ExplorerService.ExplorerServiceClient explorerApiService) =>
+        group.MapGet("/explorer/houses/{houseId:guid}", async (Guid houseId, ExplorerService.ExplorerServiceClient explorerApiService) =>
         {
             var result = await explorerApiService.GetHouseDetailAsync(new GetHouseRpcRequest { Id = houseId.ToString() });
             return Results.Json(result);

@@ -1,6 +1,6 @@
 ﻿using ErrorOr;
 
-namespace Unisphere.Explorer.Domain;
+namespace Unisphere.Explorer.Domain.Exceptions;
 
 public static class HouseErrors
 {

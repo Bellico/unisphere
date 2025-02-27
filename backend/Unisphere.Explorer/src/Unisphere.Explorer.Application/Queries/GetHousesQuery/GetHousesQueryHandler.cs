@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Unisphere.Explorer.Application.Abstractions;
 using Unisphere.Explorer.Application.Models;
-using Unisphere.Explorer.Domain;
+using Unisphere.Explorer.Domain.Exceptions;
 
 namespace Unisphere.Explorer.Application.Queries;
 

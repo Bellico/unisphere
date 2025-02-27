@@ -37,6 +37,8 @@ await app.RunAsync();
 // {
 //     app.UseSwaggerWithUi();
 //     app.ApplyMigrations();
+//     app.UseSwagger();
+//     app.UseSwaggerUI();
 // }
 // app.MapHealthChecks("health", new HealthCheckOptions
 // {
@@ -46,3 +48,4 @@ await app.RunAsync();
 // app.UseSerilogRequestLogging();
 // app.UseAuthentication();
 // app.UseAuthorization();
+// app.UseHealthChecks();
