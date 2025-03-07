@@ -1,18 +1,25 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OpenIddict.Abstractions;
+using OpenIddict.Validation.AspNetCore;
 using Unisphere.Gateway.Api.Database;
+using Unisphere.Gateway.Api.Services;
 
 namespace Unisphere.Gateway.Api.Extensions
 {
     internal static class OpenIddictExtensions
     {
-        public static void AddOpenIddict(this IServiceCollection services, IConfiguration configuration)
+        public static void AddOpenIddictAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
+            }).AddCookie();
+
+            services.AddHostedService<ApplicationManagerService>();
+
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                // Configure the Entity Framework Core to use Microsoft SQL Server.
                 options.UseSqlServer(configuration.GetConnectionString("sql-openiddict"));
-
-                // Register the entity sets needed by OpenIddict.
                 options.UseOpenIddict();
             });
 
@@ -26,26 +33,51 @@ namespace Unisphere.Gateway.Api.Extensions
                 .AddServer(
                     options =>
                     {
-                        // options.RegisterScopes(AuthorizationController.AuthorizedScopesForServerApplications);
-                        options.SetTokenEndpointUris("/connect/token");
+                        options
+                            .SetTokenEndpointUris("/connect/token")
+                            .SetAuthorizationEndpointUris("/connect/authorization");
+
                         options.UseAspNetCore()
-                                .EnableTokenEndpointPassthrough();
+                               .EnableTokenEndpointPassthrough()
+                               .EnableAuthorizationEndpointPassthrough();
 
-                        options.AddEphemeralSigningKey()
-                               .AddEphemeralEncryptionKey();
+                        // options.RegisterScopes(AuthorizationController.AuthorizedScopesForServerApplications);
+                        options.RegisterScopes(OpenIddictConstants.Scopes.Profile, OpenIddictConstants.Scopes.Email);
 
-                        // Allow client applications to use the grant_type=cient_credentials flow.
-                        options.AllowClientCredentialsFlow();
+                        options.AddDevelopmentEncryptionCertificate()
+                               .AddDevelopmentSigningCertificate();
+
+                        options.DisableAccessTokenEncryption();
+
+                        options
+                            .AllowClientCredentialsFlow()
+                            .AllowAuthorizationCodeFlow()
+                            .AllowRefreshTokenFlow()
+                            .RequireProofKeyForCodeExchange();
                     })
-
-                // Register the OpenIddict validation components.
                 .AddValidation(options =>
                 {
-                    // Import the configuration from the local OpenIddict server instance.
                     options.UseLocalServer();
 
-                    // Register the ASP.NET Core host.
                     options.UseAspNetCore();
+                })
+                .AddClient(options =>
+                {
+                    options.AllowAuthorizationCodeFlow();
+
+                    options.UseAspNetCore()
+                           .EnableRedirectionEndpointPassthrough();
+
+                    options.AddDevelopmentEncryptionCertificate()
+                           .AddDevelopmentSigningCertificate();
+
+                    options.UseWebProviders()
+                            .AddSpotify(options =>
+                            {
+                                options
+                                    .SetClientId("0e45085f6f1c45afb1c04e6b7af61061")
+                                    .SetRedirectUri(new Uri("https://localhost:7244/callback-spotify"));
+                            });
                 });
         }
     }

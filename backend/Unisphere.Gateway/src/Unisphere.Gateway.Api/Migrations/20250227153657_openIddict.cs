@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
 namespace Unisphere.Gateway.Api.Migrations
 {
     /// <inheritdoc />
@@ -8,8 +10,12 @@ namespace Unisphere.Gateway.Api.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "gateway");
+
             migrationBuilder.CreateTable(
                 name: "OpenIddictApplications",
+                schema: "gateway",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -36,6 +42,7 @@ namespace Unisphere.Gateway.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "OpenIddictScopes",
+                schema: "gateway",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -55,6 +62,7 @@ namespace Unisphere.Gateway.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "OpenIddictAuthorizations",
+                schema: "gateway",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -73,12 +81,14 @@ namespace Unisphere.Gateway.Api.Migrations
                     table.ForeignKey(
                         name: "FK_OpenIddictAuthorizations_OpenIddictApplications_ApplicationId",
                         column: x => x.ApplicationId,
+                        principalSchema: "gateway",
                         principalTable: "OpenIddictApplications",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "OpenIddictTokens",
+                schema: "gateway",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -101,17 +111,20 @@ namespace Unisphere.Gateway.Api.Migrations
                     table.ForeignKey(
                         name: "FK_OpenIddictTokens_OpenIddictApplications_ApplicationId",
                         column: x => x.ApplicationId,
+                        principalSchema: "gateway",
                         principalTable: "OpenIddictApplications",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_OpenIddictTokens_OpenIddictAuthorizations_AuthorizationId",
                         column: x => x.AuthorizationId,
+                        principalSchema: "gateway",
                         principalTable: "OpenIddictAuthorizations",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_OpenIddictApplications_ClientId",
+                schema: "gateway",
                 table: "OpenIddictApplications",
                 column: "ClientId",
                 unique: true,
@@ -119,11 +132,13 @@ namespace Unisphere.Gateway.Api.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_OpenIddictAuthorizations_ApplicationId_Status_Subject_Type",
+                schema: "gateway",
                 table: "OpenIddictAuthorizations",
                 columns: ["ApplicationId", "Status", "Subject", "Type"]);
 
             migrationBuilder.CreateIndex(
                 name: "IX_OpenIddictScopes_Name",
+                schema: "gateway",
                 table: "OpenIddictScopes",
                 column: "Name",
                 unique: true,
@@ -131,16 +146,19 @@ namespace Unisphere.Gateway.Api.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_OpenIddictTokens_ApplicationId_Status_Subject_Type",
+                schema: "gateway",
                 table: "OpenIddictTokens",
                 columns: ["ApplicationId", "Status", "Subject", "Type"]);
 
             migrationBuilder.CreateIndex(
                 name: "IX_OpenIddictTokens_AuthorizationId",
+                schema: "gateway",
                 table: "OpenIddictTokens",
                 column: "AuthorizationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OpenIddictTokens_ReferenceId",
+                schema: "gateway",
                 table: "OpenIddictTokens",
                 column: "ReferenceId",
                 unique: true,
@@ -151,16 +169,20 @@ namespace Unisphere.Gateway.Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "OpenIddictScopes");
+                name: "OpenIddictScopes",
+                schema: "gateway");
 
             migrationBuilder.DropTable(
-                name: "OpenIddictTokens");
+                name: "OpenIddictTokens",
+                schema: "gateway");
 
             migrationBuilder.DropTable(
-                name: "OpenIddictAuthorizations");
+                name: "OpenIddictAuthorizations",
+                schema: "gateway");
 
             migrationBuilder.DropTable(
-                name: "OpenIddictApplications");
+                name: "OpenIddictApplications",
+                schema: "gateway");
         }
     }
 }

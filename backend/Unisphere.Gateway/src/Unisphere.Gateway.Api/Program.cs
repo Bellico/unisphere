@@ -21,7 +21,9 @@ builder.Services.AddRateLimiter(rateLimiterOptions =>
     });
 });
 
-builder.Services.AddOpenIddict(builder.Configuration);
+builder.Services.AddOpenIddictAuthentication(builder.Configuration);
+
+builder.Services.AddAuthorization();
 
 builder.Services.AddGrpcClients();
 
@@ -57,6 +59,7 @@ app.UseAuthorization();
 
 app
     .MapDefaultEndpoints()
+    .MapAuthorizationEndpoints()
     .MapExplorerEndpoints();
 
 app.UseRateLimiter();

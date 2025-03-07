@@ -5,5 +5,5 @@ namespace Unisphere.Explorer.Application.Queries;
 
 public sealed record GetHouseDetailQuery(Guid? HouseId) : IQueryErrorOr<HouseModel>
 {
-  public string? Description { get; set; }
+    public string? Description { get; set; }
 }

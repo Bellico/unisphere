@@ -8,12 +8,12 @@ internal static class ExplorerEndpoints
     {
         var group = app.MapGroup("explorer");
 
-        group.MapGet("/explorer/error", async (ExplorerService.ExplorerServiceClient explorerApiService) =>
+        group.MapGet("error", async (ExplorerService.ExplorerServiceClient explorerApiService) =>
         {
             await explorerApiService.GetErrorAsync(new Empty());
         });
 
-        group.MapGet("/explorer/houses/{houseId:guid}", async (Guid houseId, ExplorerService.ExplorerServiceClient explorerApiService) =>
+        group.MapGet("houses/{houseId:guid}", async (Guid houseId, ExplorerService.ExplorerServiceClient explorerApiService) =>
         {
             var result = await explorerApiService.GetHouseDetailAsync(new GetHouseRpcRequest { Id = houseId.ToString() });
             return Results.Json(result);
@@ -23,9 +23,10 @@ internal static class ExplorerEndpoints
         .WithSummary("WithSummary toto")
         .WithDescription("WithDescription toto")
         .Produces<string>(StatusCodes.Status201Created)
-        .ProducesProblem(StatusCodes.Status400BadRequest);
+        .ProducesProblem(StatusCodes.Status400BadRequest)
         // .RequirePermission("Permissions.Basket.Checkout")
-        // .RequireAuthorization();
+        .RequireAuthorization();
+
         return app;
     }
 }

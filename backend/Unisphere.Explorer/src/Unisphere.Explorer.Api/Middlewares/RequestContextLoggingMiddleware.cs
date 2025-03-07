@@ -11,8 +11,8 @@ internal sealed class RequestContextLoggingMiddleware(RequestDelegate next)
 #pragma warning disable // Use explicit type
         var x = GetCorrelationId(context);
 #pragma warning restore // Use explicit type
-                               // using (LogContext.PushProperty("CorrelationId", GetCorrelationId(context)))
-                               // {
+        // using (LogContext.PushProperty("CorrelationId", GetCorrelationId(context)))
+        // {
         return next.Invoke(context);
         // }
     }

@@ -8,9 +8,7 @@ internal static class GrpcClientsExtensions
     {
         services.AddGrpcClient<ExplorerService.ExplorerServiceClient>(o =>
         {
-#pragma warning disable S1075 // URIs should not be hardcoded
             o.Address = new Uri("https://explorer");
-#pragma warning restore S1075 // URIs should not be hardcoded
         });
     }
 }

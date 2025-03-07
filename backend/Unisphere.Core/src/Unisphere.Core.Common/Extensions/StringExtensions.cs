@@ -202,11 +202,11 @@ public static class StringExtensions
 
     public static bool IsBase64String(this string base64)
     {
-        Span<byte> buffer = new Span<byte>(new byte[base64.Length]);
+        Span<byte> buffer = new(new byte[base64.Length]);
         return Convert.TryFromBase64String(base64, buffer, out int _);
     }
 
-    private static readonly Regex HttpUrlRregex = new Regex("(http(s)?):\\/\\/.\\S+", RegexOptions.Compiled);
+    private static readonly Regex HttpUrlRregex = new("(http(s)?):\\/\\/.\\S+", RegexOptions.Compiled);
 
     public static IList<string> ExtractUrls(this string source, out string replacedSource, string? replacement = null)
     {
@@ -231,8 +231,8 @@ public static class StringExtensions
         return matches;
     }
 
-    private static readonly Regex HtmlRegex = new Regex("<.*?>", RegexOptions.Compiled);
-    private static readonly Regex BrRegex = new Regex(@"(<br>|<br />|<br/>|</ br>|</br>)", RegexOptions.Compiled);
+    private static readonly Regex HtmlRegex = new("<.*?>", RegexOptions.Compiled);
+    private static readonly Regex BrRegex = new(@"(<br>|<br />|<br/>|</ br>|</br>)", RegexOptions.Compiled);
 
     public static string RemoveHtmlTags(this string html, bool keepNewLine = true)
     {
@@ -274,7 +274,7 @@ public static class StringExtensions
 
     public static string Sha256(this string value)
     {
-        StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new();
 
         byte[] bytes = SHA256.HashData(Encoding.UTF8.GetBytes(value));
 

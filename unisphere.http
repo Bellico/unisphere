@@ -1,0 +1,73 @@
+GET https://localhost:7244/login?returnUrl=https%3A%2F%2Flocalhost%3A7244%2Fconnect%2Fauthorization%3Fclient_id%3Dservice-auth%26redirect_uri%3Dhttps%3A%2F%2Flocalhost%3A7244%2Fcallback%26response_type%3Dcode%26code_challenge%3Dtoto%26scope%3Dopenid%20profile
+
+### Set Cookie
+@cookie = CfDJ8FXaQUeV1ChIsWYG-EddCLZg5E6GtupkwwTkZLmDpPRZSGsWTZug_oG9BMBW2mnLN5NLnWguoP_fpST_ugRaeYqBnwpMC8iuIMD9lSZbr2yCT58tMT-Z9albGdamofiNZVhOeskQ-h0NnIMyabeAZv_O6zE5MvWQqQVwyI32FlPe1zJBZ3tJcH6PKlv7N3U4vH1PnBzzaksozI1qRkffkUZVdC1ng_XafC3zwkZeH_xPkET9wK7-gOloEFqLKxh-lwIbcSSA8nR0vmkV7A7zBJn8BzzlYJmD8prbBWLU8uk9-rGGPn1lPgrjALR5cmG9_S7aRE3JkFJoAcq_ZI7nHNeMNgcR0n7Ho2P2rb55OeLaywZoEW6Br1lwpR15Qb0vOZFltZYxiT39eNI7Ng2o5ctSSUtwqnMmNVUWBNR8hQoN_WLTRc-cAfNzzqc3bmksc1gHke9HgoDwYxp7zzT55Wo_JOUvuEtlT-UT_sSxWIu4HAoQU9SSPaWv8hMHTjlymr5PzmJDxgPFpDFVLuZZvz6xCv4eGMB3Y0AR5QWqHxcXvMRv4djlpERbZhpHOXju7aspyhVEzIjeyHYCHGtZgstNQId_JpLNH_SRRySZ90ZNKG8bMnl27xfsJEQ87EAeXA
+
+### Auhtorization
+GET https://localhost:7244/connect/authorization
+?client_id=service-auth
+&redirect_uri=https://localhost:7244/callback
+&response_type=code
+&code_challenge=toto
+&scope=openid profile
+Cookie: .AspNetCore.Cookies={{cookie}};
+
+### Set Code
+@code = ryJitxKCFitPVj1x4jHg8Oq_mvSgDq6AJDHqBoGvINQ
+
+### Authorization Code
+POST https://localhost:7244/connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=authorization_code
+&client_id=service-auth
+&client_secret=388D45FA-B36B-4988-BA59-B187D329C207
+&code={{code}}
+&code_verifier=toto
+&redirect_uri=https://localhost:7244/callback
+
+### Credentials
+POST https://localhost:7244/connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&client_id=service-worker
+&client_secret=388D45FA-B36B-4988-BA59-B187D329C207
+
+### Set Token
+@token = eyJhbGciOiJSUzI1NiIsImtpZCI6IkJBOTczMUJGMTRCNEY3NEJEOURFRUE1NUJDRUE0NTg4MjM2MTlDNUMiLCJ4NXQiOiJ1cGN4dnhTMDkwdlozdXBWdk9wRmlDTmhuRnciLCJ0eXAiOiJhdCtqd3QifQ.eyJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MjQ0LyIsImV4cCI6MTc0MTM0MDk2MCwiaWF0IjoxNzQxMzM3MzYwLCJqdGkiOiJhMjY2NDYxOC01NTA2LTQzNDUtYmY0ZC1iMTVhMjU2YmE5YjciLCJzdWIiOiJzZXJ2aWNlLXdvcmtlciIsIm9pX3Byc3QiOiJzZXJ2aWNlLXdvcmtlciIsImNsaWVudF9pZCI6InNlcnZpY2Utd29ya2VyIiwib2lfdGtuX2lkIjoiNjcyMGUzNGYtMDU0Mi00ZTUzLTg2MzMtMWY3ZGViMzM5NjA5In0.y20wYmRRpAZ2qJz05pN0UV5a873dWr2t066FSs8EcDVUmK3y85a4mY-fncxMhH4NxM9T6b8O2Dmgj5JjGYHS5ZtfFzlnw9iirXBrgwR1qvqV1kSXu4RN6h-kaNZUd8mraw3DHIFjd0SKu5Ar9fVqWLwjqIol8WXFU3A4RawLR81UDlGvdLqAYsVVigv21pHRi-csnYISKEegYl1pHHsz_neKFklWBjWF-S3Ut8zm1tQlkGSeV32-XXt3Jw_Q2aTpN9jdc23073aVbcJp8Jl7jmb7D3D2G0fkLfhxuk5YTNXNXraylTDBdqmvcwRQ5B_w4lzy78HSK8CGG8gsp2335Q
+
+###
+GET https://localhost:7244/explorer/error
+Content-Type: application/json
+
+###
+GET https://localhost:7244/explorer/houses/981F20ED-C969-4B8C-B2DA-ACC1C38BB5A7
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### NOT FOUND
+GET https://localhost:7244/explorer/houses/981F20ED-C969-4B8C-B2DA-ACC1C38BB5A8
+Content-Type: application/json
+
+### BAD GUID
+GET https://localhost:7244/explorer/houses/981F20ED-C969-4B8C-B2DA-ACC1C38BB5A4
+Content-Type: application/json
+
+### API
+
+###
+GET https://localhost:7244/api/explorer/error
+Content-Type: application/json
+
+###
+GET https://localhost:7244/api/explorer/houses/981F20ED-C969-4B8C-B2DA-ACC1C38BB5A7
+Content-Type: application/json
+
+### NOT FOUND
+GET https://localhost:7244/api/explorer/houses/981F20ED-C969-4B8C-B2DA-ACC1C38BB5A8
+Content-Type: application/json
+
+### BAD GUID
+GET https://localhost:7244/api/explorer/houses/981F20ED-C969-4B8C-B2DA-ACC1238BB5A7
+Content-Type: application/json
