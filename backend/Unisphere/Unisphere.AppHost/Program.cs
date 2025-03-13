@@ -1,19 +1,28 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-var explorer = builder.AddProject<Projects.Unisphere_Explorer_Api>("explorer");
+// Infrastructure
+var postgres = builder.AddPostgres("postgres")
+    .WithDataVolume()
+    .WithContainerName("postgres")
+    .WithLifetime(ContainerLifetime.Persistent);
 
-// dotnet user-secrets set Parameters:sql-password 2chats1Tigre343434
-var sqlPassword = builder.AddParameter("sql-password", "2chats1Tigre343434");
+var sqlServer = builder.AddSqlServer("sqlServer")
+    .WithDataVolume()
+    .WithContainerName("sql-server")
+    .WithLifetime(ContainerLifetime.Persistent);
 
-var sqlServerGateway = builder.AddSqlServer("sql-gateway", sqlPassword)
-    .WithDataVolume();
+// Explorer Service
+var dbExplorer = postgres.AddDatabase("db-explorer");
+var explorer = builder.AddProject<Projects.Unisphere_Explorer_Api>("explorer")
+    .WithReference(dbExplorer)
+    .WaitFor(dbExplorer);
 
-var sqlDatabaseOpenIddict = sqlServerGateway.AddDatabase("sql-openiddict");
-
-builder.AddProject<Projects.Unisphere_Gateway_Api>("gateway")
+// Gateway
+var dbGateway = sqlServer.AddDatabase("db-gateway");
+var gateway = builder.AddProject<Projects.Unisphere_Gateway_Api>("gateway")
     .WithReference(explorer)
-    .WithReference(sqlDatabaseOpenIddict)
-    .WaitFor(sqlServerGateway);
+    .WithReference(dbGateway)
+    .WaitFor(dbGateway);
 
 var app = builder.Build();
 

@@ -5,17 +5,52 @@ option csharp_namespace = "Unisphere.Explorer.Api.RpcServices";
 package explorer;
 
 service ExplorerService {
-  rpc GetHouseDetail (GetHouseRpcRequest) returns (GetHouseRpcResponse);
-  rpc GetError (Empty) returns (Empty);
+  rpc SearchHouses (SearchHousesRequest) returns (SearchHousesResponse);
+  rpc GetHouse (GetHouseRequest) returns (GetHouseResponse);
+  rpc CreateHouse (CreateHouseRequest) returns (CreateHouseResponse);
+  rpc UpdateHouse (UpdateHouseRequest) returns (Empty);
+  rpc DeleteHouse (DeleteHouseRequest) returns (Empty);
 }
 
-message GetHouseRpcRequest {
+// GetHouseDetail
+message GetHouseRequest {
   string id = 1;
 }
 
-message GetHouseRpcResponse {
+message GetHouseResponse {
   string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+// SearchHouses
+message SearchHousesRequest {
+}
+
+message SearchHousesResponse {
+    repeated GetHouseResponse houses = 1;
+}
+
+// CreateHouse
+message CreateHouseRequest {
+  string name = 1;
   string description = 2;
+}
+
+message CreateHouseResponse {
+  string houseId = 1;
+}
+
+// UpdateHouse
+message UpdateHouseRequest {
+  string houseId = 1;
+  string name = 2;
+  string description = 3;
+}
+
+// DeleteHouse
+message DeleteHouseRequest {
+  string houseId = 1;
 }
 
 message Empty {}

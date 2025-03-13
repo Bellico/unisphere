@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.RateLimiting;
+using Unisphere.Core.Infrastructure;
 using Unisphere.Core.Presentation;
 using Unisphere.Gateway.Api;
+using Unisphere.Gateway.Api.Database;
 using Unisphere.Gateway.Api.Extensions;
 using Unisphere.ServiceDefaults.Extensions;
 
@@ -32,6 +34,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 builder.Services.AddProblemDetails();
+
+builder.Services.AddOpenApi();
 
 builder.Services.AddCors(options =>
 {
@@ -68,7 +72,7 @@ app.MapReverseProxy();
 
 if (app.Environment.IsDevelopment())
 {
-    await app.ConfigureDatabaseAsync();
+    await app.Services.ConfigureDatabaseAsync<ApplicationDbContext>();
     // app.UseSwagger();
     // app.UseSwaggerUI();
 }

@@ -2,11 +2,12 @@
   
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" />
-    <PackageReference Include="OpenIddict.AspNetCore" />
-    <PackageReference Include="OpenIddict.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
     <PackageReference Include="Microsoft.Extensions.ServiceDiscovery.Yarp" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+    <PackageReference Include="OpenIddict.AspNetCore" />
+    <PackageReference Include="OpenIddict.EntityFrameworkCore" />
     <PackageReference Include="Yarp.ReverseProxy" />
   </ItemGroup>
   
@@ -16,6 +17,7 @@
   </ItemGroup>
   
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Unisphere.Core\src\Unisphere.Core.Infrastructure\Unisphere.Core.Infrastructure.csproj" />
     <ProjectReference Include="..\..\..\Unisphere.Core\src\Unisphere.Core.Presentation\Unisphere.Core.Presentation.csproj" />
     <ProjectReference Include="..\..\..\Unisphere\Unisphere.ServiceDefaults\Unisphere.ServiceDefaults.csproj" />
   </ItemGroup>

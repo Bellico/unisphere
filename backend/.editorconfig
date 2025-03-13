@@ -248,6 +248,8 @@ dotnet_diagnostic.CS8620.severity = none
 dotnet_diagnostic.S1481.severity = suggestion
 # CS0219: The variable 'variable' is assigned but its value is never used
 dotnet_diagnostic.CS0219.severity = suggestion
+# CA1707: Identifiers should not contain underscores
+dotnet_diagnostic.CA1707.severity = none
 
 [*.{cpp,h,in}]
 curly_bracket_next_line = true

@@ -35,39 +35,51 @@ grant_type=client_credentials
 &client_secret=388D45FA-B36B-4988-BA59-B187D329C207
 
 ### Set Token
-@token = eyJhbGciOiJSUzI1NiIsImtpZCI6IkJBOTczMUJGMTRCNEY3NEJEOURFRUE1NUJDRUE0NTg4MjM2MTlDNUMiLCJ4NXQiOiJ1cGN4dnhTMDkwdlozdXBWdk9wRmlDTmhuRnciLCJ0eXAiOiJhdCtqd3QifQ.eyJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MjQ0LyIsImV4cCI6MTc0MTM0MDk2MCwiaWF0IjoxNzQxMzM3MzYwLCJqdGkiOiJhMjY2NDYxOC01NTA2LTQzNDUtYmY0ZC1iMTVhMjU2YmE5YjciLCJzdWIiOiJzZXJ2aWNlLXdvcmtlciIsIm9pX3Byc3QiOiJzZXJ2aWNlLXdvcmtlciIsImNsaWVudF9pZCI6InNlcnZpY2Utd29ya2VyIiwib2lfdGtuX2lkIjoiNjcyMGUzNGYtMDU0Mi00ZTUzLTg2MzMtMWY3ZGViMzM5NjA5In0.y20wYmRRpAZ2qJz05pN0UV5a873dWr2t066FSs8EcDVUmK3y85a4mY-fncxMhH4NxM9T6b8O2Dmgj5JjGYHS5ZtfFzlnw9iirXBrgwR1qvqV1kSXu4RN6h-kaNZUd8mraw3DHIFjd0SKu5Ar9fVqWLwjqIol8WXFU3A4RawLR81UDlGvdLqAYsVVigv21pHRi-csnYISKEegYl1pHHsz_neKFklWBjWF-S3Ut8zm1tQlkGSeV32-XXt3Jw_Q2aTpN9jdc23073aVbcJp8Jl7jmb7D3D2G0fkLfhxuk5YTNXNXraylTDBdqmvcwRQ5B_w4lzy78HSK8CGG8gsp2335Q
+@token = eyJhbGciOiJSUzI1NiIsImtpZCI6IkJBOTczMUJGMTRCNEY3NEJEOURFRUE1NUJDRUE0NTg4MjM2MTlDNUMiLCJ4NXQiOiJ1cGN4dnhTMDkwdlozdXBWdk9wRmlDTmhuRnciLCJ0eXAiOiJhdCtqd3QifQ.eyJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MjQ0LyIsImV4cCI6MTc0MTg3ODYyNiwiaWF0IjoxNzQxODc1MDI2LCJqdGkiOiJmYTE2NWYwMi05NDk2LTQwNjItOGIzMS1hNjdmZTY4YWI1YTMiLCJzdWIiOiJzZXJ2aWNlLXdvcmtlciIsIm9pX3Byc3QiOiJzZXJ2aWNlLXdvcmtlciIsImNsaWVudF9pZCI6InNlcnZpY2Utd29ya2VyIiwib2lfdGtuX2lkIjoiMTY4ZDQ4MjEtYjkzYS00YzkzLTkzZGUtODE0NDdlNDZjYzE5In0.ab3UeaGzPSaIVNqEjWQRAOVvnN1MeaNXTgXWwtH5NjBYUeNGK9IrDvP_E4RNed9rqdyjj1oc5_nyQIq5Z9Xb_Nujnpunx5g-h88ygftWJ8xfocwWB_CgdiRuXq8xkhm73ZzSrJemLV8D67EdZI0gWcsUfEYi26K5XBdwWC9kMlNmIE7GojMHfwNaBwSmSH7CPyBJPM-fgBiLbCzgWZZvQZG7u0XHi3Zx-fErTe6ZUaC9rOE281oUH0USAYWGox3fpLdyxPeQxpbV5VnqisMDeyMUEE3RuaGvLLA3pjBHhEwtg4vyt7RUAnFvT9NoKq0iETgCOVNm9Yl8uRDBomrjjQ
 
-###
-GET https://localhost:7244/explorer/error
+### Create House
+POST https://localhost:7244/explorer/houses
 Content-Type: application/json
 
-###
-GET https://localhost:7244/explorer/houses/981F20ED-C969-4B8C-B2DA-ACC1C38BB5A7
+{
+  "name": "House 1",
+  "description": "House 1 description"
+}
+
+### Get Houses
+GET https://localhost:7244/explorer/houses
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get House by Id
+GET https://localhost:7244/explorer/houses/01958073-743d-727d-bfef-92ae7ab9a5f6
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Update House by Id
+POST https://localhost:7244/explorer/houses/01958073-743d-727d-bfef-92ae7ab9a5f6
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "House updated",
+  "description": "House description updated"
+}
+
+### Delete House by Id
+DELETE  https://localhost:7244/explorer/houses/01958073-743d-727d-bfef-92ae7ab9a5f6
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ### NOT FOUND
-GET https://localhost:7244/explorer/houses/981F20ED-C969-4B8C-B2DA-ACC1C38BB5A8
+GET https://localhost:7244/explorer/houses/01958073-743d-727d-bfef-92ae7ab9a5f6
 Content-Type: application/json
-
-### BAD GUID
-GET https://localhost:7244/explorer/houses/981F20ED-C969-4B8C-B2DA-ACC1C38BB5A4
-Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ### API
-
-###
-GET https://localhost:7244/api/explorer/error
+### API Get Houses by Id
+GET https://localhost:7244/api/explorer/houses/01958073-743d-727d-bfef-92ae7ab9a5f6
 Content-Type: application/json
-
-###
-GET https://localhost:7244/api/explorer/houses/981F20ED-C969-4B8C-B2DA-ACC1C38BB5A7
-Content-Type: application/json
-
-### NOT FOUND
-GET https://localhost:7244/api/explorer/houses/981F20ED-C969-4B8C-B2DA-ACC1C38BB5A8
-Content-Type: application/json
-
-### BAD GUID
-GET https://localhost:7244/api/explorer/houses/981F20ED-C969-4B8C-B2DA-ACC1238BB5A7
+### API NOT FOUND
+GET https://localhost:7244/api/explorer/houses/xxx
 Content-Type: application/json

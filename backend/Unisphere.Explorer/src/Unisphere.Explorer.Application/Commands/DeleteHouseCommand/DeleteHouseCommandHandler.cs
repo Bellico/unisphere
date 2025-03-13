@@ -5,9 +5,9 @@ using Unisphere.Explorer.Domain.Exceptions;
 
 namespace Unisphere.Explorer.Application.Commands;
 
-internal sealed class UpdateHouseCommandHandler(IApplicationDbContext dbContext) : ICommandHandler<UpdateHouseCommand, bool>
+internal sealed class DeleteHouseCommandHandler(IApplicationDbContext dbContext) : ICommandHandler<DeleteHouseCommand, bool>
 {
-    public async Task<ErrorOr<bool>> Handle(UpdateHouseCommand command, CancellationToken cancellationToken)
+    public async Task<ErrorOr<bool>> Handle(DeleteHouseCommand command, CancellationToken cancellationToken)
     {
         var house = await dbContext.Houses
             .Where(house => house.Id == command.HouseId)
@@ -18,8 +18,7 @@ internal sealed class UpdateHouseCommandHandler(IApplicationDbContext dbContext)
             return HouseErrors.NotFound(command.HouseId.GetValueOrDefault());
         }
 
-        house.Name = command.Name;
-        house.Description = command.Description;
+        dbContext.Houses.Remove(house);
 
         await dbContext.SaveChangesAsync(cancellationToken);
 

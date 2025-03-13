@@ -11,7 +11,12 @@ internal sealed class CreateHouseCommandHandler(IApplicationDbContext context)
     {
         var house = new House
         {
+            Name = command.Description,
             Description = command.Description,
+            PhysicalAddress = PhysicalAddress.Empty,
+            AuthorId = Guid.NewGuid(),
+            ImageUrl = new Uri("http://image.com"),
+            Notation = Notation.Zero,
         };
 
         context.Houses.Add(house);

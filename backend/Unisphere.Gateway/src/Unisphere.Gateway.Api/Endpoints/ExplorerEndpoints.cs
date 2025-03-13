@@ -8,15 +8,14 @@ internal static class ExplorerEndpoints
     {
         var group = app.MapGroup("explorer");
 
-        group.MapGet("error", async (ExplorerService.ExplorerServiceClient explorerApiService) =>
+        group.MapGet("houses", async (ExplorerService.ExplorerServiceClient explorerApiService) =>
         {
-            await explorerApiService.GetErrorAsync(new Empty());
+            return (await explorerApiService.SearchHousesAsync(new SearchHousesRequest())).Houses;
         });
 
         group.MapGet("houses/{houseId:guid}", async (Guid houseId, ExplorerService.ExplorerServiceClient explorerApiService) =>
         {
-            var result = await explorerApiService.GetHouseDetailAsync(new GetHouseRpcRequest { Id = houseId.ToString() });
-            return Results.Json(result);
+            return await explorerApiService.GetHouseAsync(new GetHouseRequest { Id = houseId.ToString() });
         })
         .WithTags("tags toto")
         .WithName("name toto")
@@ -24,8 +23,25 @@ internal static class ExplorerEndpoints
         .WithDescription("WithDescription toto")
         .Produces<string>(StatusCodes.Status201Created)
         .ProducesProblem(StatusCodes.Status400BadRequest)
-        // .RequirePermission("Permissions.Basket.Checkout")
         .RequireAuthorization();
+
+        group.MapPost("houses", async (ExplorerService.ExplorerServiceClient explorerApiService, CreateHouseRequest request) =>
+        {
+            var result = await explorerApiService.CreateHouseAsync(request);
+
+            return Results.Created($"explorer/houses/{result.HouseId}", result.HouseId);
+        });
+
+        group.MapPost("houses/{houseId:guid}", async (ExplorerService.ExplorerServiceClient explorerApiService, Guid houseId, UpdateHouseRequest request) =>
+        {
+            request.HouseId = houseId.ToString();
+            await explorerApiService.UpdateHouseAsync(request);
+        });
+
+        group.MapDelete("houses/{houseId:guid}", async (ExplorerService.ExplorerServiceClient explorerApiService, Guid houseId) =>
+        {
+            await explorerApiService.DeleteHouseAsync(new DeleteHouseRequest { HouseId = houseId.ToString() });
+        });
 
         return app;
     }

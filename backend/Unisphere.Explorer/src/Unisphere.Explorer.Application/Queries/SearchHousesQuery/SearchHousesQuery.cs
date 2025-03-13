@@ -3,4 +3,4 @@ using Unisphere.Explorer.Application.Models;
 
 namespace Unisphere.Explorer.Application.Queries;
 
-public sealed record GetHousesQuery(Guid? HouseId) : IQueryErrorOr<List<HouseModel>>;
+public sealed record SearchHousesQuery() : IQuery<IList<HouseModel>>;

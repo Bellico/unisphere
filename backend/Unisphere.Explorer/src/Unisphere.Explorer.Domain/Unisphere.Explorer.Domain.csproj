@@ -2,7 +2,6 @@
   
   <ItemGroup>
     <Folder Include="Aggregates\" />
-    <Folder Include="ValueObjects\" />
   </ItemGroup>
 
   <ItemGroup>

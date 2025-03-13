@@ -1,7 +1,8 @@
+using Unisphere.Core.Infrastructure;
 using Unisphere.Explorer.Api;
 using Unisphere.Explorer.Api.Endpoints;
 using Unisphere.Explorer.Api.Middlewares;
-using Unisphere.Explorer.Api.RpcServices;
+using Unisphere.Explorer.Api.Services;
 using Unisphere.Explorer.Application;
 using Unisphere.Explorer.Infrastructure;
 using Unisphere.ServiceDefaults.Extensions;
@@ -13,7 +14,7 @@ builder.AddServiceDefaults();
 builder.Services
     .RegisterPresentationServices()
     .RegisterApplicationServices()
-    .RegisterInfrastructureServices();
+    .RegisterInfrastructureServices(builder.Configuration);
 
 var app = builder.Build();
 
@@ -26,6 +27,11 @@ app.MapExplorerEndpoints();
 app.UseMiddleware<RequestContextLoggingMiddleware>();
 
 app.MapGrpcService<ExplorerRpcService>();
+
+if (app.Environment.IsDevelopment())
+{
+    await app.Services.ConfigureDatabaseAsync<ApplicationDbContext>();
+}
 
 await app.RunAsync();
 

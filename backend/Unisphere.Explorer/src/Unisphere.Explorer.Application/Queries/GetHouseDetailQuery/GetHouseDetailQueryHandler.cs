@@ -1,25 +1,30 @@
 ﻿using ErrorOr;
+using Microsoft.EntityFrameworkCore;
 using Unisphere.Explorer.Application.Abstractions;
 using Unisphere.Explorer.Application.Models;
 using Unisphere.Explorer.Domain.Exceptions;
 
 namespace Unisphere.Explorer.Application.Queries;
 
-internal sealed partial class GetHouseDetailQueryHandler() : IQueryErrorOrHandler<GetHouseDetailQuery, HouseModel>
+internal sealed partial class GetHouseDetailQueryHandler(IApplicationDbContext dbContext) : IQueryErrorOrHandler<GetHouseDetailQuery, HouseModel>
 {
     public async Task<ErrorOr<HouseModel>> Handle(GetHouseDetailQuery query, CancellationToken cancellationToken)
     {
-        await Task.Delay(1, cancellationToken);
+        var house = await dbContext.Houses
+            .Where(house => house.Id == query.HouseId)
+            .Select(house => new HouseModel
+            {
+                Id = house.Id,
+                Name = house.Name,
+                Description = house.Description,
+            })
+            .SingleOrDefaultAsync(cancellationToken);
 
-        if (query.HouseId == new Guid("981F20ED-C969-4B8C-B2DA-ACC1C38BB5A8"))
+        if (house is null)
         {
             return HouseErrors.NotFound(query.HouseId.GetValueOrDefault());
         }
 
-        return new HouseModel
-        {
-            Id = query.HouseId.Value,
-            Description = "A beautiful house",
-        };
+        return house;
     }
 }

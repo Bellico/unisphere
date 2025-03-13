@@ -19,7 +19,7 @@ namespace Unisphere.Gateway.Api.Extensions
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("sql-openiddict"));
+                options.UseSqlServer(configuration.GetConnectionString("db-gateway"));
                 options.UseOpenIddict();
             });
 

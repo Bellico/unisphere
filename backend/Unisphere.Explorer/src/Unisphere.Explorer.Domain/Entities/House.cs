@@ -1,18 +1,27 @@
-﻿namespace Unisphere.Explorer.Domain;
+﻿using System.Collections.ObjectModel;
+
+namespace Unisphere.Explorer.Domain;
 
 public class House
 {
+    public House()
+    {
+        Bookings = new Collection<Booking>();
+    }
+
     public Guid Id { get; set; }
+
+    public Guid AuthorId { get; set; }
 
     public string Name { get; set; }
 
-    public string Address { get; set; }
+    public PhysicalAddress PhysicalAddress { get; set; }
 
     public string Description { get; set; }
 
+    public Notation Notation { get; set; }
+
     public Uri ImageUrl { get; set; }
 
-#pragma warning disable CA2227 // Collection properties should be read only
-    public ICollection<Booking> Bookings { get; set; }
-#pragma warning restore CA2227 // Collection properties should be read only
+    public ICollection<Booking> Bookings { get; }
 }

@@ -6,13 +6,13 @@ namespace Unisphere.Explorer.Api.Endpoints;
 
 internal static class ExplorerEndpoints
 {
+    /// <summary>
+    /// Exemple endpoint instead of gRPC.
+    /// </summary>
+    /// <param name="app">A IEndpointRouteBuilder.</param>
+    /// <returns>IEndpointRouteBuilder.</returns>
     public static IEndpointRouteBuilder MapExplorerEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapGet("/api/error", () =>
-        {
-            throw new InvalidOperationException("Error business data");
-        });
-
         app.MapGet("/api/houses/{houseId:guid}", async (Guid houseId, ISender sender, CancellationToken cancellationToken) =>
         {
             var command = new GetHouseDetailQuery(houseId);

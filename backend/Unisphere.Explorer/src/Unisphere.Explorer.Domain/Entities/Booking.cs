@@ -8,7 +8,9 @@ public class Booking
 
     public Guid HouseId { get; set; }
 
-    public DateTime CheckIn { get; set; }
+    public House House { get; set; }
 
-    public DateTime CheckOut { get; set; }
+    public DateOnly CheckIn { get; set; }
+
+    public DateOnly CheckOut { get; set; }
 }
