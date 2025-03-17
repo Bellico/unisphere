@@ -1,4 +1,5 @@
 using Unisphere.Core.Infrastructure;
+using Unisphere.Core.Presentation.Extensions;
 using Unisphere.Explorer.Api;
 using Unisphere.Explorer.Api.Endpoints;
 using Unisphere.Explorer.Api.Middlewares;
@@ -11,6 +12,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
+builder.Services.AddAuthenticationServices();
+
+builder.Services.AddAuthorization();
+
 builder.Services
     .RegisterPresentationServices()
     .RegisterApplicationServices()
@@ -20,9 +25,13 @@ var app = builder.Build();
 
 app.UseExceptionHandler();
 
+app.UseAuthentication();
+
+app.UseAuthorization();
+
 app.MapDefaultEndpoints();
 
-app.MapExplorerEndpoints();
+app.MapExplorerEndpoints(); // Not necessary, just an example
 
 app.UseMiddleware<RequestContextLoggingMiddleware>();
 
@@ -36,22 +45,5 @@ if (app.Environment.IsDevelopment())
 await app.RunAsync();
 
 // builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
-// builder.Services.AddSwaggerGenWithAuth();
-// builder.Services.AddEndpointsApiExplorer();
-// builder.Services.AddSwaggerGen();
-// if (app.Environment.IsDevelopment())
-// {
-//     app.UseSwaggerWithUi();
-//     app.ApplyMigrations();
-//     app.UseSwagger();
-//     app.UseSwaggerUI();
-// }
-// app.MapHealthChecks("health", new HealthCheckOptions
-// {
-//    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-// });
 // app.UseRequestContextLogging();
 // app.UseSerilogRequestLogging();
-// app.UseAuthentication();
-// app.UseAuthorization();
-// app.UseHealthChecks();

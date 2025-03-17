@@ -1,14 +1,16 @@
 using Grpc.Core;
 using Mapster;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Unisphere.Core.Common.Extensions;
-using Unisphere.Core.Presentation;
+using Unisphere.Core.Presentation.Errors;
 using Unisphere.Explorer.Api.RpcServices;
 using Unisphere.Explorer.Application.Commands;
 using Unisphere.Explorer.Application.Queries;
 
 namespace Unisphere.Explorer.Api.Services;
 
+[Authorize]
 internal sealed class ExplorerRpcService(ISender sender) : ExplorerService.ExplorerServiceBase
 {
     public override async Task<SearchHousesResponse> SearchHouses(SearchHousesRequest request, ServerCallContext context)

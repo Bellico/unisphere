@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.RateLimiting;
 using Unisphere.Core.Infrastructure;
-using Unisphere.Core.Presentation;
+using Unisphere.Core.Presentation.Errors;
+using Unisphere.Explorer.Api.RpcServices;
 using Unisphere.Gateway.Api;
 using Unisphere.Gateway.Api.Database;
 using Unisphere.Gateway.Api.Extensions;
@@ -23,13 +24,14 @@ builder.Services.AddRateLimiter(rateLimiterOptions =>
     });
 });
 
-builder.Services.AddOpenIddictAuthentication(builder.Configuration);
+builder.Services.AddAuthenticationGateway(builder.Configuration);
 
 builder.Services.AddAuthorization();
 
-builder.Services.AddGrpcClients();
+builder.Services
+    .AddGrpcServiceClient<ExplorerService.ExplorerServiceClient>("explorer");
 
-builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
@@ -73,7 +75,7 @@ app.MapReverseProxy();
 if (app.Environment.IsDevelopment())
 {
     await app.Services.ConfigureDatabaseAsync<ApplicationDbContext>();
-    // app.UseSwagger();
+    app.MapOpenApi();
     // app.UseSwaggerUI();
 }
 

@@ -2,9 +2,9 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Unisphere.Explorer.Application.Behaviors;
+namespace Unisphere.Core.Application.Behaviors;
 
-internal sealed partial class RequestLoggingPipelineBehavior<TRequest, TResponse>(
+public sealed partial class RequestLoggingPipelineBehavior<TRequest, TResponse>(
     ILogger<RequestLoggingPipelineBehavior<TRequest, TResponse>> logger)
     : IPipelineBehavior<TRequest, TResponse>
     where TRequest : class
@@ -39,10 +39,10 @@ internal sealed partial class RequestLoggingPipelineBehavior<TRequest, TResponse
         return result;
     }
 
-    [LoggerMessage(1, LogLevel.Information, "Processing request{requestName}")]
+    [LoggerMessage(1, LogLevel.Information, "Processing request {requestName}")]
     static partial void LogProcessingRequest(ILogger logger, string requestName);
 
-    [LoggerMessage(2, LogLevel.Information, "Completed request{requestName}")]
+    [LoggerMessage(2, LogLevel.Information, "Completed request {requestName}")]
     static partial void LogCompletedRequest(ILogger logger, string requestName);
 
     [LoggerMessage(3, LogLevel.Error, "Failed request {requestName}")]

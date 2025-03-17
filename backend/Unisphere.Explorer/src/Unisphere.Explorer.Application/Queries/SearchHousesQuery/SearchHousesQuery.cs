@@ -1,4 +1,4 @@
-﻿using Unisphere.Explorer.Application.Abstractions;
+﻿using Unisphere.Core.Application.Abstractions;
 using Unisphere.Explorer.Application.Models;
 
 namespace Unisphere.Explorer.Application.Queries;

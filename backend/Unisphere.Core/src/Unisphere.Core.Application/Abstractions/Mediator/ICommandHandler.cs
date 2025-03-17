@@ -1,7 +1,7 @@
 ﻿using ErrorOr;
 using MediatR;
 
-namespace Unisphere.Explorer.Application.Abstractions;
+namespace Unisphere.Core.Application.Abstractions;
 
 public interface ICommandHandler<in TCommand> : IRequestHandler<TCommand>
     where TCommand : ICommand;

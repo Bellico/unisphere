@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Unisphere.Core.Presentation;
+using Unisphere.Core.Presentation.Errors;
 using Unisphere.Explorer.Application.Queries;
 
 namespace Unisphere.Explorer.Api.Endpoints;

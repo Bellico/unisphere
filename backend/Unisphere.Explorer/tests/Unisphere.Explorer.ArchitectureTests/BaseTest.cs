@@ -11,7 +11,7 @@ public abstract class BaseTest
 #pragma warning restore CA1515 // Consider making public types internal
 {
     protected static readonly Assembly DomainAssembly = typeof(House).Assembly;
-    protected static readonly Assembly ApplicationAssembly = typeof(ICommand).Assembly;
+    protected static readonly Assembly ApplicationAssembly = typeof(IApplicationDbContext).Assembly;
     protected static readonly Assembly InfrastructureAssembly = typeof(ApplicationDbContext).Assembly;
     protected static readonly Assembly PresentationAssembly = typeof(ExplorerEndpoints).Assembly;
 }

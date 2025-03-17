@@ -1,10 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <PackageReference Include="ErrorOr" />
+    <PackageReference Include="FluentValidation" />
+    <PackageReference Include="Grpc.AspNetCore" />
     <PackageReference Include="Grpc.Core.Api" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.Middleware" />
-    <PackageReference Include="FluentValidation" />
-    <PackageReference Include="ErrorOr" />
+    <PackageReference Include="OpenIddict.AspNetCore" />
   </ItemGroup>
   
 </Project>

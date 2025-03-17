@@ -111,6 +111,7 @@ public static class ServiceDefaultsExtensions
             app.MapHealthChecks("/alive", new HealthCheckOptions
             {
                 Predicate = r => r.Tags.Contains("live"),
+                // ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
             });
         }
 

@@ -1,4 +1,5 @@
-﻿using Unisphere.Core.Presentation;
+﻿using Unisphere.Core.Presentation.Errors;
+using Unisphere.Core.Presentation.Interceptors;
 
 namespace Unisphere.Explorer.Api;
 
@@ -7,11 +8,7 @@ internal static class DependencyInjection
     public static IServiceCollection RegisterPresentationServices(this IServiceCollection services)
     {
         services.AddGrpc(c => c.Interceptors.Add<GrpcGlobalExceptionHandlerInterceptor>());
-
-        services.AddEndpointsApiExplorer();
-
-        // services.AddSwaggerGen();
-        services.AddExceptionHandler<GlobalExceptionHandler>();
+        services.AddExceptionHandler<GlobalExceptionHandler>(); // Not necessary, use with endpoints
         services.AddProblemDetails();
 
         return services;

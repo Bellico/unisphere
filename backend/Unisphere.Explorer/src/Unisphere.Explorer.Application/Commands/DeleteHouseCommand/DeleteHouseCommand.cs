@@ -1,4 +1,4 @@
-﻿using Unisphere.Explorer.Application.Abstractions;
+﻿using Unisphere.Core.Application.Abstractions;
 
 namespace Unisphere.Explorer.Application.Commands;
 

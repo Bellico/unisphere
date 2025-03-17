@@ -6,41 +6,36 @@ internal static class ExplorerEndpoints
 {
     public static IEndpointRouteBuilder MapExplorerEndpoints(this IEndpointRouteBuilder app)
     {
-        var group = app.MapGroup("explorer");
+        var group = app.MapGroup("explorer").RequireAuthorization();
 
-        group.MapGet("houses", async (ExplorerService.ExplorerServiceClient explorerApiService) =>
+        group.MapGet("houses", async (ExplorerService.ExplorerServiceClient explorerApiService, CancellationToken cancellationToken) =>
         {
-            return (await explorerApiService.SearchHousesAsync(new SearchHousesRequest())).Houses;
+            return (await explorerApiService.SearchHousesAsync(new SearchHousesRequest(), cancellationToken: cancellationToken)).Houses;
         });
 
-        group.MapGet("houses/{houseId:guid}", async (Guid houseId, ExplorerService.ExplorerServiceClient explorerApiService) =>
+        group.MapGet("houses/{houseId:guid}", async (Guid houseId, ExplorerService.ExplorerServiceClient explorerApiService, CancellationToken cancellationToken) =>
         {
-            return await explorerApiService.GetHouseAsync(new GetHouseRequest { Id = houseId.ToString() });
-        })
-        .WithTags("tags toto")
-        .WithName("name toto")
-        .WithSummary("WithSummary toto")
-        .WithDescription("WithDescription toto")
-        .Produces<string>(StatusCodes.Status201Created)
-        .ProducesProblem(StatusCodes.Status400BadRequest)
-        .RequireAuthorization();
+            return await explorerApiService.GetHouseAsync(new GetHouseRequest { Id = houseId.ToString() }, cancellationToken: cancellationToken);
+        });
 
-        group.MapPost("houses", async (ExplorerService.ExplorerServiceClient explorerApiService, CreateHouseRequest request) =>
+        group.MapPost("houses", async (ExplorerService.ExplorerServiceClient explorerApiService, CreateHouseRequest request, CancellationToken cancellationToken) =>
         {
-            var result = await explorerApiService.CreateHouseAsync(request);
+            var result = await explorerApiService.CreateHouseAsync(request, cancellationToken: cancellationToken);
 
             return Results.Created($"explorer/houses/{result.HouseId}", result.HouseId);
-        });
+        })
+        .Produces<string>(StatusCodes.Status201Created)
+        .ProducesProblem(StatusCodes.Status400BadRequest);
 
-        group.MapPost("houses/{houseId:guid}", async (ExplorerService.ExplorerServiceClient explorerApiService, Guid houseId, UpdateHouseRequest request) =>
+        group.MapPost("houses/{houseId:guid}", async (ExplorerService.ExplorerServiceClient explorerApiService, Guid houseId, UpdateHouseRequest request, CancellationToken cancellationToken) =>
         {
             request.HouseId = houseId.ToString();
-            await explorerApiService.UpdateHouseAsync(request);
+            await explorerApiService.UpdateHouseAsync(request, cancellationToken: cancellationToken);
         });
 
-        group.MapDelete("houses/{houseId:guid}", async (ExplorerService.ExplorerServiceClient explorerApiService, Guid houseId) =>
+        group.MapDelete("houses/{houseId:guid}", async (ExplorerService.ExplorerServiceClient explorerApiService, Guid houseId, CancellationToken cancellationToken) =>
         {
-            await explorerApiService.DeleteHouseAsync(new DeleteHouseRequest { HouseId = houseId.ToString() });
+            await explorerApiService.DeleteHouseAsync(new DeleteHouseRequest { HouseId = houseId.ToString() }, cancellationToken: cancellationToken);
         });
 
         return app;

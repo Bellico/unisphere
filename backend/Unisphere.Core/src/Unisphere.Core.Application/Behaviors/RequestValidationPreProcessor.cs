@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using MediatR.Pipeline;
 
-namespace Unisphere.Explorer.Application.Behaviors;
+namespace Unisphere.Core.Application.Behaviors;
 
 public class RequestValidationPreProcessor<TRequest> : IRequestPreProcessor<TRequest> where TRequest : notnull
 {

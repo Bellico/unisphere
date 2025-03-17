@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using Unisphere.Explorer.Application.Behaviors;
+using Unisphere.Core.Application.Behaviors;
 
 namespace Unisphere.Explorer.Application;
 

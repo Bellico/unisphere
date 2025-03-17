@@ -1,6 +1,6 @@
 ﻿using ErrorOr;
 
-namespace Unisphere.Core.Presentation;
+namespace Unisphere.Core.Presentation.Errors;
 
 public static class ErrorOrHelper
 {

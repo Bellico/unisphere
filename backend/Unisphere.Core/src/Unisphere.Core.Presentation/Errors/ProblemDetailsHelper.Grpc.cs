@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 
-namespace Unisphere.Core.Presentation;
+namespace Unisphere.Core.Presentation.Errors;
 
 public static partial class ProblemDetailHelper
 {

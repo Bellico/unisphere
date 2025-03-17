@@ -2,8 +2,9 @@
 using Grpc.Core;
 using Grpc.Core.Interceptors;
 using Microsoft.Extensions.Logging;
+using Unisphere.Core.Presentation.Errors;
 
-namespace Unisphere.Core.Presentation;
+namespace Unisphere.Core.Presentation.Interceptors;
 
 public partial class GrpcGlobalExceptionHandlerInterceptor(
     ILogger<GrpcGlobalExceptionHandlerInterceptor> logger)

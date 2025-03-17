@@ -8,7 +8,7 @@ namespace Unisphere.Gateway.Api.Extensions
 {
     internal static class OpenIddictExtensions
     {
-        public static void AddOpenIddictAuthentication(this IServiceCollection services, IConfiguration configuration)
+        public static void AddAuthenticationGateway(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthentication(options =>
             {
