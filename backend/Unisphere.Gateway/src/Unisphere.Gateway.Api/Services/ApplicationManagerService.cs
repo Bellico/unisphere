@@ -1,4 +1,5 @@
 ﻿using OpenIddict.Abstractions;
+using Unisphere.Core.Common.Constants;
 using Unisphere.Gateway.Api.Database;
 
 namespace Unisphere.Gateway.Api.Services
@@ -26,11 +27,10 @@ namespace Unisphere.Gateway.Api.Services
                         Permissions =
                         {
                             OpenIddictConstants.Permissions.Endpoints.Token,
-                            OpenIddictConstants.Permissions.Endpoints.Authorization,
                             OpenIddictConstants.Permissions.GrantTypes.ClientCredentials,
                             OpenIddictConstants.Permissions.ResponseTypes.Code,
 
-                            // OpenIddictConstants.Permissions.Prefixes.Scope + "data_cgi_app_only"
+                            OpenIddictConstants.Permissions.Prefixes.Scope + UnisphereConstants.Scopes.ExplorerApi,
                         },
                     },
                     cancellationToken);
@@ -54,8 +54,10 @@ namespace Unisphere.Gateway.Api.Services
                             OpenIddictConstants.Permissions.ResponseTypes.Code,
                             OpenIddictConstants.Permissions.Scopes.Profile,
                             OpenIddictConstants.Permissions.Scopes.Email,
+
+                            OpenIddictConstants.Permissions.Prefixes.Scope + UnisphereConstants.Scopes.ExplorerApi,
                         },
-                        // Requirements = { OpenIddictConstants.Requirements.Features.ProofKeyForCodeExchange },
+                        Requirements = { OpenIddictConstants.Requirements.Features.ProofKeyForCodeExchange },
                     },
                     cancellationToken);
             }

@@ -2,7 +2,7 @@
 
 namespace Unisphere.Explorer.Application.Commands;
 
-public sealed class DeleteHouseCommand : ICommand<bool>
+public sealed record DeleteHouseCommand : ICommand<bool>
 {
     public Guid? HouseId { get; set; }
 }

@@ -10,7 +10,7 @@ using Unisphere.Explorer.Application.Queries;
 
 namespace Unisphere.Explorer.Api.Services;
 
-[Authorize]
+[Authorize("explorer-policy")]
 internal sealed class ExplorerRpcService(ISender sender) : ExplorerService.ExplorerServiceBase
 {
     public override async Task<SearchHousesResponse> SearchHouses(SearchHousesRequest request, ServerCallContext context)

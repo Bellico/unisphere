@@ -2,7 +2,7 @@
 
 namespace Unisphere.Explorer.Application.Commands;
 
-public sealed class UpdateHouseCommand : ICommand<bool>
+public sealed record UpdateHouseCommand : ICommand<bool>
 {
     public Guid? HouseId { get; set; }
 

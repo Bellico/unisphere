@@ -9,11 +9,11 @@ GET https://localhost:7244/connect/authorization
 &redirect_uri=https://localhost:7244/callback
 &response_type=code
 &code_challenge=toto
-&scope=openid profile
+&scope=openid profile explorer-api
 Cookie: .AspNetCore.Cookies={{cookie}};
 
 ### Set Code
-@code = ryJitxKCFitPVj1x4jHg8Oq_mvSgDq6AJDHqBoGvINQ
+@code = 9NCA0u6u-HlKMIzaD85xo8iiGDsWXYEHrMVXjkrPiTQ
 
 ### Authorization Code
 POST https://localhost:7244/connect/token
@@ -33,12 +33,13 @@ Content-Type: application/x-www-form-urlencoded
 grant_type=client_credentials
 &client_id=service-worker
 &client_secret=388D45FA-B36B-4988-BA59-B187D329C207
+&scope=openid explorer-api
 
 ### Set Token
-@token = eyJhbGciOiJSUzI1NiIsImtpZCI6IkJBOTczMUJGMTRCNEY3NEJEOURFRUE1NUJDRUE0NTg4MjM2MTlDNUMiLCJ4NXQiOiJ1cGN4dnhTMDkwdlozdXBWdk9wRmlDTmhuRnciLCJ0eXAiOiJhdCtqd3QifQ.eyJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MjQ0LyIsImV4cCI6MTc0MjIyMzAxNCwiaWF0IjoxNzQyMjE5NDE0LCJqdGkiOiJhODUxYWEzMi1jMDIxLTRmNmItYmExYi0wNDkyYjI1ZGY2YTUiLCJzdWIiOiJzZXJ2aWNlLXdvcmtlciIsIm9pX3Byc3QiOiJzZXJ2aWNlLXdvcmtlciIsImNsaWVudF9pZCI6InNlcnZpY2Utd29ya2VyIiwib2lfdGtuX2lkIjoiM2VjZDFkMzAtMjJjNS00OGMwLTk2NTgtYWU1YzZiMWE1M2RmIn0.bOw6Y2s_jVnDaUnmo5Iincl6GM1t_J-rriwa-M1iC6VrCU6kwztrg_GIW9p_Pa4ysumIBlZcBj6bS2lZqMnRIz9bVPJXLrvICmkg0h3fENOQ-rYpskAzD8Ee7VDp8-ho1v54g_1roQB05VC55_cqYIuzEDQHU1wmoJwzpg1b3Q-uLY5SX7MdGPvLEX-vKIRorej0RnmY95pLIkjuNUCAiWOabezNmdZ7LL4fbFRK1iBVj3mSnsunUtnn5biYiPhOoJF3UKRYYlyuVOEvWknpwSNsSHvNMErf66C5CO0Xm_-63zlt7KfBF7xZpiIUePvmnyEOF7mAa--6xWADXG6Jsw
+@token = eyJhbGciOiJSUzI1NiIsImtpZCI6IkJBOTczMUJGMTRCNEY3NEJEOURFRUE1NUJDRUE0NTg4MjM2MTlDNUMiLCJ4NXQiOiJ1cGN4dnhTMDkwdlozdXBWdk9wRmlDTmhuRnciLCJ0eXAiOiJhdCtqd3QifQ.eyJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MjQ0LyIsImV4cCI6MTc0MjQ3MDcxOSwiaWF0IjoxNzQyNDY3MTE5LCJzY29wZSI6ImV4cGxvcmVyLWFwaSIsImp0aSI6ImFkOTc1ODZkLTY4ZGItNDMyYi04OTU2LWZjMmNlYWUyYTllMyIsInN1YiI6InNlcnZpY2Utd29ya2VyIiwib2lfcHJzdCI6InNlcnZpY2Utd29ya2VyIiwiY2xpZW50X2lkIjoic2VydmljZS13b3JrZXIiLCJvaV90a25faWQiOiIzYjQ3Mjk2NC1kZTUyLTQ2YjYtODMzMS0yNjE2YjRhZGIyMmYifQ.tMKuenD1S7ZNqm_aA4mWNuUoUVjsOATAn-u_SvLrCOZNErb3_GD8stavvoh1NeSf0qwWL3lZ1f7Gt0Wh037XG32Gn1FU2Z88HqTjESLLZn1FI40x_JQPndYErtDzcgYGpGBOq_tTmv3uvbmav-1hbDJFc2ohO2JGWt81G9nygeJ20iGSuvhBv41h3B8SGqPtfxqbZFrz1kzfXlfva3i2Uw0N-hTuz2DgtpUM1RAWahevvyAyenC1g7T0k0VTZJCZBm8DQo90h4Pp-Ki18RUIjOWn4wQpAy5Hf7vykzXNqi1hgZrNHsE6haMobf6TqL1HVOZezXCbzo47H6bMbsCdvg
 
 ### Create House
-POST https://localhost:7244/explorer/houses
+POST https://localhost:7244/api/explorer/houses
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -48,17 +49,17 @@ Authorization: Bearer {{token}}
 }
 
 ### Get Houses
-GET https://localhost:7244/explorer/houses
+GET https://localhost:7244/api/explorer/houses
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ### Get House by Id
-GET https://localhost:7244/explorer/houses/019585d2-4840-73c1-95f7-19fd72ac13cd
+GET https://localhost:7244/api/explorer/houses/01958078-19db-7eed-adf7-94b77900c8ca
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ### Update House by Id
-POST https://localhost:7244/explorer/houses/019585d2-4840-73c1-95f7-19fd72ac13cd
+PUT https://localhost:7244/api/explorer/houses/01958078-19db-7eed-adf7-94b77900c8ca
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -68,19 +69,26 @@ Authorization: Bearer {{token}}
 }
 
 ### Delete House by Id
-DELETE  https://localhost:7244/explorer/houses/019585d2-4840-73c1-95f7-19fd72ac13cd
+DELETE  https://localhost:7244/explorer/houses/01958078-19db-7eed-adf7-94b77900c8ca
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ### NOT FOUND
-GET https://localhost:7244/explorer/houses/019585d2-4840-73c1-95f7-19fd72ac13cd
+GET https://localhost:7244/explorer/houses/01958078-19db-7eed-adf7-94b77900c8ca
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ### API
 ### API Get Houses by Id
-GET https://localhost:7244/api/explorer/houses/019585d2-4840-73c1-95f7-19fd72ac13cd
+GET https://localhost:7244/api/explorer/houses/01958078-19db-7eed-adf7-94b77900c8ca
 Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get Houses
+GET https://localhost:7244/api/explorer/houses
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
 ### API NOT FOUND
 GET https://localhost:7244/api/explorer/houses/xxx
 Content-Type: application/json

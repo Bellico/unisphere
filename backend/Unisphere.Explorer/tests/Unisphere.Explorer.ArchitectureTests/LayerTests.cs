@@ -1,9 +1,19 @@
-﻿using NetArchTest.Rules;
+﻿using System.Reflection;
+using NetArchTest.Rules;
+using Unisphere.Explorer.Api.Endpoints;
+using Unisphere.Explorer.Application.Abstractions;
+using Unisphere.Explorer.Domain;
+using Unisphere.Explorer.Infrastructure;
 
 namespace Unisphere.Explorer.ArchitectureTests;
 
-public class LayerTests : BaseTest
+public class LayerTests
 {
+    protected static readonly Assembly DomainAssembly = typeof(House).Assembly;
+    protected static readonly Assembly ApplicationAssembly = typeof(IApplicationDbContext).Assembly;
+    protected static readonly Assembly InfrastructureAssembly = typeof(ApplicationDbContext).Assembly;
+    protected static readonly Assembly PresentationAssembly = typeof(ExplorerEndpoints).Assembly;
+
     [Fact]
     public void Domain_Should_NotHaveDependencyOnApplication()
     {

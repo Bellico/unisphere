@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OpenIddict.Abstractions;
 using OpenIddict.Validation.AspNetCore;
+using Unisphere.Core.Common.Constants;
 using Unisphere.Gateway.Api.Database;
 using Unisphere.Gateway.Api.Services;
 
@@ -41,8 +42,10 @@ namespace Unisphere.Gateway.Api.Extensions
                                .EnableTokenEndpointPassthrough()
                                .EnableAuthorizationEndpointPassthrough();
 
-                        // options.RegisterScopes(AuthorizationController.AuthorizedScopesForServerApplications);
-                        options.RegisterScopes(OpenIddictConstants.Scopes.Profile, OpenIddictConstants.Scopes.Email);
+                        options.RegisterScopes([
+                            OpenIddictConstants.Scopes.Profile,
+                            OpenIddictConstants.Scopes.Email,
+                            .. UnisphereConstants.Scopes.AuthorizedScopes]);
 
                         options.AddDevelopmentEncryptionCertificate()
                                .AddDevelopmentSigningCertificate();

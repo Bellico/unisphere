@@ -2,7 +2,7 @@
 
 namespace Unisphere.Explorer.Application.Commands;
 
-public class DeleteHouseCommandValidator : AbstractValidator<DeleteHouseCommand>
+internal sealed class DeleteHouseCommandValidator : AbstractValidator<DeleteHouseCommand>
 {
     public DeleteHouseCommandValidator()
     {

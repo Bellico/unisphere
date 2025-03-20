@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.RateLimiting;
 using Unisphere.Core.Infrastructure;
 using Unisphere.Core.Presentation.Errors;
-using Unisphere.Explorer.Api.RpcServices;
 using Unisphere.Gateway.Api;
 using Unisphere.Gateway.Api.Database;
 using Unisphere.Gateway.Api.Extensions;
@@ -28,11 +27,8 @@ builder.Services.AddAuthenticationGateway(builder.Configuration);
 
 builder.Services.AddAuthorization();
 
-builder.Services
-    .AddGrpcServiceClient<ExplorerService.ExplorerServiceClient>("explorer");
-
-builder.Services.AddHttpContextAccessor();
-
+// builder.Services
+//    .AddGrpcServiceClient<ExplorerService.ExplorerServiceClient>("explorer");
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 builder.Services.AddProblemDetails();
@@ -65,8 +61,7 @@ app.UseAuthorization();
 
 app
     .MapDefaultEndpoints()
-    .MapAuthorizationEndpoints()
-    .MapExplorerEndpoints();
+    .MapAuthorizationEndpoints();
 
 app.UseRateLimiter();
 

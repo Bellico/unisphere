@@ -2,7 +2,7 @@
 
 namespace Unisphere.Explorer.Application.Commands;
 
-public sealed class CreateHouseCommand : ICommand<Guid>
+public sealed record CreateHouseCommand : ICommand<Guid>
 {
     public string Name { get; set; }
 

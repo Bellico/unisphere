@@ -2,7 +2,7 @@
 
 namespace Unisphere.Explorer.Application.Queries;
 
-public class GetHouseDetailQueryValidator : AbstractValidator<GetHouseDetailQuery>
+internal sealed class GetHouseDetailQueryValidator : AbstractValidator<GetHouseDetailQuery>
 {
     public GetHouseDetailQueryValidator()
     {

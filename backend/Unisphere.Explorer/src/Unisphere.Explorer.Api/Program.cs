@@ -1,3 +1,4 @@
+using OpenIddict.Abstractions;
 using Unisphere.Core.Infrastructure;
 using Unisphere.Core.Presentation.Extensions;
 using Unisphere.Explorer.Api;
@@ -14,12 +15,23 @@ builder.AddServiceDefaults();
 
 builder.Services.AddAuthenticationServices();
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(
+    options =>
+    {
+        options.AddPolicy(
+            "explorer-policy", policy =>
+             policy
+                .RequireAuthenticatedUser()
+                .RequireClaim("sub")
+                .RequireAssertion(x => x.User.HasScope("explorer-api")));
+    });
 
 builder.Services
     .RegisterPresentationServices()
     .RegisterApplicationServices()
     .RegisterInfrastructureServices(builder.Configuration);
+
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
@@ -31,9 +43,11 @@ app.UseAuthorization();
 
 app.MapDefaultEndpoints();
 
-app.MapExplorerEndpoints(); // Not necessary, just an example
-
 app.UseMiddleware<RequestContextLoggingMiddleware>();
+
+app.MapGroup("/")
+    .RequireAuthorization("explorer-policy")
+    .MapExplorerEndpoints();
 
 app.MapGrpcService<ExplorerRpcService>();
 

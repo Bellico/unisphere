@@ -250,6 +250,8 @@ dotnet_diagnostic.S1481.severity = suggestion
 dotnet_diagnostic.CS0219.severity = suggestion
 # CA1707: Identifiers should not contain underscores
 dotnet_diagnostic.CA1707.severity = none
+# CA1034: Nested types should not be visible
+dotnet_diagnostic.CA1034.severity = none
 
 [*.{cpp,h,in}]
 curly_bracket_next_line = true

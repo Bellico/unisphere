@@ -8,6 +8,7 @@ using OpenIddict.Abstractions;
 using OpenIddict.Client.AspNetCore;
 using OpenIddict.Client.WebIntegration;
 using OpenIddict.Server.AspNetCore;
+using Unisphere.Core.Common.Constants;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
 namespace Unisphere.Gateway.Api;
@@ -116,16 +117,12 @@ internal static class AuthorizationEndpoints
             return Forbid(Errors.InvalidClient, "The provided application does not exists.");
         }
 
-        //// Retrieve the profile of the logged in user.
-        // var user = await _userManager.GetUserAsync(User);
-        // if (user == null)
-        // {
-        //    return Results.Forbid();
-        // }
+        var userId = "01958078-19db-7eed-adf7-94b77900c8ca"; // Use identifier
+
         var identity = new ClaimsIdentity(TokenValidationParameters.DefaultAuthenticationType);
-        identity.AddClaim(Claims.Subject, $"user.Id");
-        identity.AddClaim(Claims.Name, "user.UserName");
-        identity.AddClaim(Claims.Email, "user.Email");
+        identity.AddClaim(Claims.Subject, userId);
+        identity.AddClaim(Claims.Name, "Franck");
+        identity.AddClaim(Claims.Email, "franck@hotmail.fr");
         identity.AddClaim(Claims.PreferredUsername, identifier);
 
         var claimsPrincipal = new ClaimsPrincipal(identity);
@@ -157,6 +154,8 @@ internal static class AuthorizationEndpoints
         });
 
         var claimsPrincipal = new ClaimsPrincipal(identity);
+
+        claimsPrincipal.SetScopes(UnisphereConstants.Scopes.AuthorizedScopes.Intersect(request.GetScopes()));
 
         // claimsPrincipal.SetResources(Audience);
         // Set the list of scopes granted to the client application.

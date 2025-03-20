@@ -2,7 +2,7 @@
 
 namespace Unisphere.Explorer.Application.Commands;
 
-public class UpdateHouseCommandValidator : AbstractValidator<UpdateHouseCommand>
+internal sealed class UpdateHouseCommandValidator : AbstractValidator<UpdateHouseCommand>
 {
     public UpdateHouseCommandValidator()
     {

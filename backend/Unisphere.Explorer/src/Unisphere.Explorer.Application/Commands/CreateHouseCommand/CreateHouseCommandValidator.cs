@@ -2,7 +2,7 @@
 
 namespace Unisphere.Explorer.Application.Commands;
 
-public class CreateHouseCommandValidator : AbstractValidator<CreateHouseCommand>
+internal sealed class CreateHouseCommandValidator : AbstractValidator<CreateHouseCommand>
 {
     public CreateHouseCommandValidator()
     {
