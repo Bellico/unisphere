@@ -1,6 +1,8 @@
-﻿namespace Unisphere.Explorer.Domain;
+﻿using Unisphere.Core.Common;
 
-public class Notation
+namespace Unisphere.Explorer.Domain;
+
+public class Notation : ValueObject
 {
     public static Notation Zero { get; } = new Notation(0, 0, 0);
 
@@ -19,4 +21,12 @@ public class Notation
     public int CommunicationNote { get; set; }
 
     public int LocationNote { get; set; }
+
+    protected override IEnumerable<object> GetEqualityComponents()
+    {
+        yield return GlobalNote;
+        yield return CleanlinessNote;
+        yield return CommunicationNote;
+        yield return LocationNote;
+    }
 }

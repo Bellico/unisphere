@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Unisphere.Core.Application.Exceptions;
 
 namespace Unisphere.Core.Presentation.Errors;
 
@@ -20,6 +21,7 @@ public partial class GlobalExceptionHandler(IHostEnvironment env, ILogger<Global
         var problemDetails = exception switch
         {
             ValidationException validationException => ProblemDetailHelper.CreateProblemDetails(validationException),
+            ForbiddenAccessException forbiddenAccessException => ProblemDetailHelper.CreateProblemDetails(forbiddenAccessException),
             RpcException rpcException => ProblemDetailHelper.CreateProblemDetails(httpContext, rpcException, env),
             _ => ProblemDetailHelper.CreateProblemDetails(httpContext, exception, env),
         };

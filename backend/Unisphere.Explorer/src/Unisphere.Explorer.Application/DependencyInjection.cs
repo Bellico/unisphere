@@ -18,6 +18,7 @@ public static class DependencyInjection
             config.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
 
             config.AddOpenBehavior(typeof(RequestLoggingPipelineBehavior<,>));
+            config.AddOpenBehavior(typeof(RequestPerformancePipelineBehaviour<,>));
             config.AddOpenRequestPreProcessor(typeof(RequestValidationPreProcessor<>));
             config.AddOpenRequestPreProcessor(typeof(AuthorizationPreProcessor<>));
         });

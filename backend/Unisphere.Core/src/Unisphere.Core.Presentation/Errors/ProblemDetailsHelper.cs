@@ -4,6 +4,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
+using Unisphere.Core.Application.Exceptions;
 
 namespace Unisphere.Core.Presentation.Errors;
 
@@ -51,7 +52,7 @@ public static partial class ProblemDetailHelper
                  .GroupBy(e => e.PropertyName)
                  .ToDictionary(f => f.Key, f => f.Select(u => u.ErrorMessage).ToList());
 
-        var problemDetails = new ProblemDetails
+        return new ProblemDetails
         {
             Status = StatusCodes.Status400BadRequest,
             Type = ProblemTypes[StatusCodes.Status400BadRequest],
@@ -61,8 +62,16 @@ public static partial class ProblemDetailHelper
                 { "errors", validationErrors },
             },
         };
+    }
 
-        return problemDetails;
+    public static ProblemDetails CreateProblemDetails(ForbiddenAccessException forbiddenAccessException)
+    {
+        return new ProblemDetails
+        {
+            Status = StatusCodes.Status403Forbidden,
+            Type = ProblemTypes[StatusCodes.Status403Forbidden],
+            Title = forbiddenAccessException.Message ?? "Forbidden",
+        };
     }
 
     public static IResult Problem(IList<Error> errors)

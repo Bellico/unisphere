@@ -3,7 +3,7 @@ using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Unisphere.Core.Common.Extensions;
-using Unisphere.Core.Presentation.Errors;
+using Unisphere.Core.Presentation.Extensions;
 using Unisphere.Explorer.Api.RpcServices;
 using Unisphere.Explorer.Application.Commands;
 using Unisphere.Explorer.Application.Queries;

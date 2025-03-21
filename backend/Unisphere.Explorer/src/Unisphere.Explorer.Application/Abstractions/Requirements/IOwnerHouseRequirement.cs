@@ -1,4 +1,4 @@
-﻿namespace AFactoring.Core.Middle.Definitions.Interfaces;
+﻿namespace Unisphere.Explorer.Application.Abstractions;
 
 public interface IOwnerHouseRequirement
 {

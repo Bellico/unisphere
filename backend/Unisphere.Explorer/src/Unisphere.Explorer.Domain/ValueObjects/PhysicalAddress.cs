@@ -1,6 +1,8 @@
-﻿namespace Unisphere.Explorer.Domain;
+﻿using Unisphere.Core.Common;
 
-public class PhysicalAddress
+namespace Unisphere.Explorer.Domain;
+
+public class PhysicalAddress : ValueObject
 {
     public static PhysicalAddress Empty { get; } = new PhysicalAddress(string.Empty, string.Empty, string.Empty, string.Empty);
 
@@ -31,5 +33,13 @@ public class PhysicalAddress
             && !string.IsNullOrEmpty(Street)
             && !string.IsNullOrEmpty(ZipCode)
             && !string.IsNullOrEmpty(CountryCode);
+    }
+
+    protected override IEnumerable<object> GetEqualityComponents()
+    {
+        yield return City;
+        yield return Street;
+        yield return ZipCode;
+        yield return CountryCode;
     }
 }

@@ -4,7 +4,6 @@ using Unisphere.Core.Infrastructure;
 using Unisphere.Core.Presentation.Extensions;
 using Unisphere.Core.Presentation.Middlewares;
 using Unisphere.Explorer.Api;
-using Unisphere.Explorer.Api.Endpoints;
 using Unisphere.Explorer.Api.Services;
 using Unisphere.Explorer.Application;
 using Unisphere.Explorer.Infrastructure;
@@ -32,8 +31,6 @@ builder.Services
     .RegisterApplicationServices()
     .RegisterInfrastructureServices(builder.Configuration);
 
-builder.Services.AddHttpContextAccessor();
-
 var app = builder.Build();
 
 app.UseExceptionHandler();
@@ -48,7 +45,7 @@ app.UseMiddleware<RequestContextLoggingMiddleware>();
 
 app.MapGroup("/")
     .RequireAuthorization(UnisphereConstants.PoliciesNames.ExplorerPolicy)
-    .MapExplorerEndpoints();
+    .MapEndpoints();
 
 app.MapGrpcService<ExplorerRpcService>();
 

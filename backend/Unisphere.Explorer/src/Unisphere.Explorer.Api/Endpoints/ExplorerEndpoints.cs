@@ -1,13 +1,14 @@
 ﻿using MediatR;
 using Unisphere.Core.Presentation.Errors;
+using Unisphere.Core.Presentation.Interfaces;
 using Unisphere.Explorer.Application.Commands;
 using Unisphere.Explorer.Application.Queries;
 
 namespace Unisphere.Explorer.Api.Endpoints;
 
-internal static class ExplorerEndpoints
+internal class ExplorerEndpoints : IEndpointGroupBase
 {
-    public static IEndpointRouteBuilder MapExplorerEndpoints(this IEndpointRouteBuilder app)
+    public IEndpointRouteBuilder Map(IEndpointRouteBuilder app)
     {
         app.MapGet("/api/houses", async (ISender sender, CancellationToken cancellationToken) =>
         {

@@ -4,8 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Unisphere.Core.Application.Behaviors;
 
-public sealed partial class RequestLoggingPipelineBehavior<TRequest, TResponse>(
-    ILogger<RequestLoggingPipelineBehavior<TRequest, TResponse>> logger)
+public sealed partial class RequestLoggingPipelineBehavior<TRequest, TResponse>(ILogger<RequestLoggingPipelineBehavior<TRequest, TResponse>> logger)
     : IPipelineBehavior<TRequest, TResponse>
     where TRequest : class
 {

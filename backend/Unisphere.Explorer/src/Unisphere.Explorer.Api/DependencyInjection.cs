@@ -7,6 +7,7 @@ internal static class DependencyInjection
 {
     public static IServiceCollection RegisterPresentationServices(this IServiceCollection services)
     {
+        services.AddHttpContextAccessor();
         services.AddGrpc(c => c.Interceptors.Add<GrpcGlobalExceptionHandlerInterceptor>());
         services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddProblemDetails();

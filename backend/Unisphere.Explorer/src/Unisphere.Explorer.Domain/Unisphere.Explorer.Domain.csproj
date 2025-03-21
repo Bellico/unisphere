@@ -2,10 +2,16 @@
   
   <ItemGroup>
     <Folder Include="Aggregates\" />
+    <Folder Include="Events\" />
+    <Folder Include="Enums\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="ErrorOr" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Unisphere.Core\src\Unisphere.Core.Common\Unisphere.Core.Common.csproj" />
   </ItemGroup>
   
 </Project>
