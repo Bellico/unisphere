@@ -1,8 +1,9 @@
-﻿using Microsoft.Extensions.Primitives;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Primitives;
 
-namespace Unisphere.Explorer.Api.Middlewares;
+namespace Unisphere.Core.Presentation.Middlewares;
 
-internal sealed class RequestContextLoggingMiddleware(RequestDelegate next)
+public sealed class RequestContextLoggingMiddleware(RequestDelegate next)
 {
     private const string CorrelationIdHeaderName = "Correlation-Id";
 

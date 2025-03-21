@@ -1,6 +1,9 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Unisphere.Core.Application.Behaviors;
+using Unisphere.Explorer.Application.Abstractions;
+using Unisphere.Explorer.Application.Behaviors;
+using Unisphere.Explorer.Application.Services;
 
 namespace Unisphere.Explorer.Application;
 
@@ -16,7 +19,10 @@ public static class DependencyInjection
 
             config.AddOpenBehavior(typeof(RequestLoggingPipelineBehavior<,>));
             config.AddOpenRequestPreProcessor(typeof(RequestValidationPreProcessor<>));
+            config.AddOpenRequestPreProcessor(typeof(AuthorizationPreProcessor<>));
         });
+
+        services.AddScoped<IUserDataScopeService, UserDataScopeService>();
 
         return services;
     }

@@ -1,8 +1,9 @@
-﻿using Unisphere.Core.Application.Abstractions;
+﻿using AFactoring.Core.Middle.Definitions.Interfaces;
+using Unisphere.Core.Application.Abstractions;
 
 namespace Unisphere.Explorer.Application.Commands;
 
-public sealed record UpdateHouseCommand : ICommand<bool>
+public sealed record UpdateHouseCommand : ICommand<bool>, IOwnerHouseRequirement
 {
     public Guid? HouseId { get; set; }
 

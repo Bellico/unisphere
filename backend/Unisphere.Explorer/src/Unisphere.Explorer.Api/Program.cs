@@ -1,9 +1,10 @@
 using OpenIddict.Abstractions;
+using Unisphere.Core.Common.Constants;
 using Unisphere.Core.Infrastructure;
 using Unisphere.Core.Presentation.Extensions;
+using Unisphere.Core.Presentation.Middlewares;
 using Unisphere.Explorer.Api;
 using Unisphere.Explorer.Api.Endpoints;
-using Unisphere.Explorer.Api.Middlewares;
 using Unisphere.Explorer.Api.Services;
 using Unisphere.Explorer.Application;
 using Unisphere.Explorer.Infrastructure;
@@ -19,11 +20,11 @@ builder.Services.AddAuthorization(
     options =>
     {
         options.AddPolicy(
-            "explorer-policy", policy =>
+             UnisphereConstants.PoliciesNames.ExplorerPolicy, policy =>
              policy
                 .RequireAuthenticatedUser()
                 .RequireClaim("sub")
-                .RequireAssertion(x => x.User.HasScope("explorer-api")));
+                .RequireAssertion(x => x.User.HasScope(UnisphereConstants.Scopes.ExplorerApi)));
     });
 
 builder.Services
@@ -46,7 +47,7 @@ app.MapDefaultEndpoints();
 app.UseMiddleware<RequestContextLoggingMiddleware>();
 
 app.MapGroup("/")
-    .RequireAuthorization("explorer-policy")
+    .RequireAuthorization(UnisphereConstants.PoliciesNames.ExplorerPolicy)
     .MapExplorerEndpoints();
 
 app.MapGrpcService<ExplorerRpcService>();

@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Unisphere.Core.Presentation.Interceptors;
 
-namespace Unisphere.Gateway.Api.Extensions;
+namespace Unisphere.Core.Presentation.Extensions;
 
 public static class GrpcClientsExtensions
 {

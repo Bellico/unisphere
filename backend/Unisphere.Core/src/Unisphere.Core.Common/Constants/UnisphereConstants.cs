@@ -13,4 +13,9 @@ public static class UnisphereConstants
             ExplorerApi,
         ];
     }
+
+    public static class PoliciesNames
+    {
+        public const string ExplorerPolicy = "explorer-policy";
+    }
 }
