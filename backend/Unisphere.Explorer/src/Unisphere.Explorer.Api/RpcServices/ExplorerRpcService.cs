@@ -2,6 +2,7 @@ using Grpc.Core;
 using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Unisphere.Core.Common.Constants;
 using Unisphere.Core.Common.Extensions;
 using Unisphere.Core.Presentation.Extensions;
 using Unisphere.Explorer.Api.RpcServices;
@@ -10,7 +11,7 @@ using Unisphere.Explorer.Application.Queries;
 
 namespace Unisphere.Explorer.Api.Services;
 
-[Authorize("explorer-policy")]
+[Authorize(UnisphereConstants.PoliciesNames.ExplorerPolicy)]
 internal sealed class ExplorerRpcService(ISender sender) : ExplorerService.ExplorerServiceBase
 {
     public override async Task<SearchHousesResponse> SearchHouses(SearchHousesRequest request, ServerCallContext context)

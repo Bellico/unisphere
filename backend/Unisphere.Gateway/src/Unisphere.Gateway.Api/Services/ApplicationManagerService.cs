@@ -46,6 +46,7 @@ namespace Unisphere.Gateway.Api.Services
                         ClientType = OpenIddictConstants.ClientTypes.Confidential,
                         DisplayName = "Service Auth",
                         RedirectUris = { new Uri("https://localhost:7244/callback") },
+                        Requirements = { OpenIddictConstants.Requirements.Features.ProofKeyForCodeExchange },
                         Permissions =
                         {
                             OpenIddictConstants.Permissions.Endpoints.Authorization,
@@ -57,7 +58,6 @@ namespace Unisphere.Gateway.Api.Services
 
                             OpenIddictConstants.Permissions.Prefixes.Scope + UnisphereConstants.Scopes.ExplorerApi,
                         },
-                        Requirements = { OpenIddictConstants.Requirements.Features.ProofKeyForCodeExchange },
                     },
                     cancellationToken);
             }

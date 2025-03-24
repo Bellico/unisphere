@@ -1,49 +1,27 @@
-using OpenIddict.Abstractions;
 using Unisphere.Core.Common.Constants;
 using Unisphere.Core.Infrastructure;
 using Unisphere.Core.Presentation.Extensions;
-using Unisphere.Core.Presentation.Middlewares;
-using Unisphere.Explorer.Api;
 using Unisphere.Explorer.Api.Services;
 using Unisphere.Explorer.Application;
 using Unisphere.Explorer.Infrastructure;
-using Unisphere.ServiceDefaults.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddServiceDefaults();
-
-builder.Services.AddAuthenticationServices();
-
-builder.Services.AddAuthorization(
-    options =>
-    {
-        options.AddPolicy(
-             UnisphereConstants.PoliciesNames.ExplorerPolicy, policy =>
-             policy
-                .RequireAuthenticatedUser()
-                .RequireClaim("sub")
-                .RequireAssertion(x => x.User.HasScope(UnisphereConstants.Scopes.ExplorerApi)));
-    });
+builder
+    .AddUnisphereCore()
+    .AddAuthenticationServices()
+    .AddAuthorizationServices(UnisphereConstants.PoliciesNames.ExplorerPolicy, UnisphereConstants.Scopes.ExplorerApi);
 
 builder.Services
-    .RegisterPresentationServices()
     .RegisterApplicationServices()
     .RegisterInfrastructureServices(builder.Configuration);
 
 var app = builder.Build();
 
-app.UseExceptionHandler();
+app.UseUnisphereCore();
 
-app.UseAuthentication();
-
-app.UseAuthorization();
-
-app.MapDefaultEndpoints();
-
-app.UseMiddleware<RequestContextLoggingMiddleware>();
-
-app.MapGroup("/")
+app
+    .MapGroup("/")
     .RequireAuthorization(UnisphereConstants.PoliciesNames.ExplorerPolicy)
     .MapEndpoints();
 

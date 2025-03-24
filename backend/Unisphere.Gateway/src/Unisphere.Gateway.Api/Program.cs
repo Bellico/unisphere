@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.RateLimiting;
+using Unisphere.Core.Common.Constants;
 using Unisphere.Core.Infrastructure;
 using Unisphere.Core.Presentation.Errors;
 using Unisphere.Gateway.Api;
@@ -25,13 +26,15 @@ builder.Services.AddRateLimiter(rateLimiterOptions =>
 
 builder.Services.AddAuthenticationGateway(builder.Configuration);
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(UnisphereConstants.PoliciesNames.GatewayPolicy, policy => policy.RequireAuthenticatedUser());
+});
 
-// builder.Services
-//    .AddGrpcServiceClient<ExplorerService.ExplorerServiceClient>("explorer");
-builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
-
-builder.Services.AddProblemDetails();
+// Keep ?
+builder.Services
+    .AddProblemDetails()
+    .AddExceptionHandler<GlobalExceptionHandler>();
 
 builder.Services.AddOpenApi();
 
@@ -69,9 +72,10 @@ app.MapReverseProxy();
 
 if (app.Environment.IsDevelopment())
 {
-    await app.Services.ConfigureDatabaseAsync<ApplicationDbContext>();
-    app.MapOpenApi();
     // app.UseSwaggerUI();
+    app.MapOpenApi();
+
+    await app.Services.ConfigureDatabaseAsync<ApplicationDbContext>();
 }
 
 await app.RunAsync();

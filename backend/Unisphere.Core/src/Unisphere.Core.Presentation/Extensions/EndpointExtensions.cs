@@ -14,11 +14,9 @@ public static class EndpointExtensions
 
     public static IEndpointRouteBuilder MapEndpoints(this IEndpointRouteBuilder app)
     {
-        var endpointGroupType = typeof(IEndpointGroupBase);
-
         var endpointGroupTypes = Assembly.GetCallingAssembly()
             .GetTypes()
-            .Where(t => t.IsAssignableTo(endpointGroupType));
+            .Where(t => t.IsAssignableTo(typeof(IEndpointGroupBase)));
 
         foreach (var type in endpointGroupTypes)
         {

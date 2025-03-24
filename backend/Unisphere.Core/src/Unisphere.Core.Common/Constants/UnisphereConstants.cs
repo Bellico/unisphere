@@ -16,6 +16,8 @@ public static class UnisphereConstants
 
     public static class PoliciesNames
     {
+        public const string GatewayPolicy = "gateway-policy";
+
         public const string ExplorerPolicy = "explorer-policy";
     }
 }

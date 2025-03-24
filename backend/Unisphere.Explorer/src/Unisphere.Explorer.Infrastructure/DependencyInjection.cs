@@ -1,5 +1,4 @@
-﻿using Application.Abstractions.Authentication;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +11,8 @@ public static class DependencyInjection
 {
     public static IServiceCollection RegisterInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
+        services.RegisterInfrastructureCore();
+
         var connectionString = configuration.GetConnectionString("db-explorer");
 
         services.AddDbContext<IApplicationDbContext, ApplicationDbContext>(
@@ -22,8 +23,6 @@ public static class DependencyInjection
         services
             .AddHealthChecks()
             .AddNpgSql(connectionString);
-
-        services.AddScoped<IUserContextService, UserContextService>();
 
         return services;
     }

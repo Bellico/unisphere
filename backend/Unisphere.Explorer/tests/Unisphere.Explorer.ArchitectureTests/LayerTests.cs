@@ -15,32 +15,14 @@ public class LayerTests
     protected static readonly Assembly PresentationAssembly = typeof(ExplorerEndpoints).Assembly;
 
     [Fact]
-    public void Domain_Should_NotHaveDependencyOnApplication()
+    public void DomainLayer_ShouldNotHaveDependencyOn_Application_Infrastructure_Presentation_Layer()
     {
         TestResult result = Types.InAssembly(DomainAssembly)
             .Should()
-            .NotHaveDependencyOn("Application")
-            .GetResult();
-
-        result.IsSuccessful.ShouldBeTrue();
-    }
-
-    [Fact]
-    public void DomainLayer_ShouldNotHaveDependencyOn_InfrastructureLayer()
-    {
-        TestResult result = Types.InAssembly(DomainAssembly)
-            .Should()
+            .NotHaveDependencyOn(ApplicationAssembly.GetName().Name)
+            .And()
             .NotHaveDependencyOn(InfrastructureAssembly.GetName().Name)
-            .GetResult();
-
-        result.IsSuccessful.ShouldBeTrue();
-    }
-
-    [Fact]
-    public void DomainLayer_ShouldNotHaveDependencyOn_PresentationLayer()
-    {
-        TestResult result = Types.InAssembly(DomainAssembly)
-            .Should()
+            .And()
             .NotHaveDependencyOn(PresentationAssembly.GetName().Name)
             .GetResult();
 
@@ -48,21 +30,12 @@ public class LayerTests
     }
 
     [Fact]
-    public void ApplicationLayer_ShouldNotHaveDependencyOn_InfrastructureLayer()
+    public void ApplicationLayer_ShouldNotHaveDependencyOn_InfrastructureLayer_Presentation_Layer()
     {
         TestResult result = Types.InAssembly(ApplicationAssembly)
             .Should()
             .NotHaveDependencyOn(InfrastructureAssembly.GetName().Name)
-            .GetResult();
-
-        result.IsSuccessful.ShouldBeTrue();
-    }
-
-    [Fact]
-    public void ApplicationLayer_ShouldNotHaveDependencyOn_PresentationLayer()
-    {
-        TestResult result = Types.InAssembly(ApplicationAssembly)
-            .Should()
+            .And()
             .NotHaveDependencyOn(PresentationAssembly.GetName().Name)
             .GetResult();
 
