@@ -37,4 +37,6 @@ dotnet tool install --global dotnet-ef
 dotnet ef migrations add openIddict --context ApplicationDbContext
 
 dotnet ef migrations add explorer --project ../Unisphere.Explorer.Infrastructure/
+
+dotnet ef migrations add identity --project ../Unisphere.Identity.Infrastructure/
 ```

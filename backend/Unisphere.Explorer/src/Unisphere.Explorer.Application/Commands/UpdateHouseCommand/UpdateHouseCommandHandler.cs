@@ -6,7 +6,7 @@ using Unisphere.Explorer.Domain.Exceptions;
 
 namespace Unisphere.Explorer.Application.Commands;
 
-internal sealed class UpdateHouseCommandHandler(IApplicationDbContext dbContext) : ICommandHandler<UpdateHouseCommand, bool>
+internal sealed class UpdateHouseCommandHandler(IExplorerDbContext dbContext) : ICommandHandler<UpdateHouseCommand, bool>
 {
     public async Task<ErrorOr<bool>> Handle(UpdateHouseCommand command, CancellationToken cancellationToken)
     {

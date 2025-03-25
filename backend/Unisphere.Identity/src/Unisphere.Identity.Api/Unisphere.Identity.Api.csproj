@@ -1,2 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Unisphere.Core\src\Unisphere.Core.Presentation\Unisphere.Core.Presentation.csproj" />
+    <ProjectReference Include="..\Unisphere.Identity.Application\Unisphere.Identity.Application.csproj" />
+    <ProjectReference Include="..\Unisphere.Identity.Infrastructure\Unisphere.Identity.Infrastructure.csproj" />
+  </ItemGroup>
 </Project>

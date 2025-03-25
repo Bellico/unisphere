@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Unisphere.Explorer.Infrastructure.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(ExplorerDbContext))]
     [Migration("20250310142354_physicalAdresse")]
     partial class PhysicalAdresse
     {

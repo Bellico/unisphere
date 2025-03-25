@@ -4,7 +4,7 @@ using Unisphere.Explorer.Domain;
 
 namespace Unisphere.Explorer.Infrastructure;
 
-public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options), IApplicationDbContext
+public sealed class ExplorerDbContext(DbContextOptions<ExplorerDbContext> options) : DbContext(options), IExplorerDbContext
 {
     public DbSet<Booking> Bookings { get; set; }
 
@@ -12,7 +12,7 @@ public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ExplorerDbContext).Assembly);
 
         modelBuilder.HasDefaultSchema("explorer");
     }

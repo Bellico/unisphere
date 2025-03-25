@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Unisphere.Core\src\Unisphere.Core.Application\Unisphere.Core.Application.csproj" />
+    <ProjectReference Include="..\Unisphere.Identity.Domain\Unisphere.Identity.Domain.csproj" />
+  </ItemGroup>
+  
+</Project>

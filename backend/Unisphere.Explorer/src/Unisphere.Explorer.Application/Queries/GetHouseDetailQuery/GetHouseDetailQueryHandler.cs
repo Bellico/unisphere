@@ -7,7 +7,7 @@ using Unisphere.Explorer.Domain.Exceptions;
 
 namespace Unisphere.Explorer.Application.Queries;
 
-internal sealed partial class GetHouseDetailQueryHandler(IApplicationDbContext dbContext) : IQueryErrorOrHandler<GetHouseDetailQuery, HouseModel>
+internal sealed partial class GetHouseDetailQueryHandler(IExplorerDbContext dbContext) : IQueryErrorOrHandler<GetHouseDetailQuery, HouseModel>
 {
     public async Task<ErrorOr<HouseModel>> Handle(GetHouseDetailQuery query, CancellationToken cancellationToken)
     {

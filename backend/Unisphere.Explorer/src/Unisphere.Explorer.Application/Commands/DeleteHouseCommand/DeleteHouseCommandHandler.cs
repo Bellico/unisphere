@@ -6,7 +6,7 @@ using Unisphere.Explorer.Domain.Exceptions;
 
 namespace Unisphere.Explorer.Application.Commands;
 
-internal sealed class DeleteHouseCommandHandler(IApplicationDbContext dbContext) : ICommandHandler<DeleteHouseCommand, bool>
+internal sealed class DeleteHouseCommandHandler(IExplorerDbContext dbContext) : ICommandHandler<DeleteHouseCommand, bool>
 {
     public async Task<ErrorOr<bool>> Handle(DeleteHouseCommand command, CancellationToken cancellationToken)
     {

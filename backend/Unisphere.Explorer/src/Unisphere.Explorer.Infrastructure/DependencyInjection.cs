@@ -15,7 +15,7 @@ public static class DependencyInjection
 
         var connectionString = configuration.GetConnectionString("db-explorer");
 
-        services.AddDbContext<IApplicationDbContext, ApplicationDbContext>(
+        services.AddDbContext<IExplorerDbContext, ExplorerDbContext>(
             options => options
                 .UseNpgsql(connectionString, npgsqlOptions => npgsqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, "explorer"))
                 .UseSnakeCaseNamingConvention());

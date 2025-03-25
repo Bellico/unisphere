@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Unisphere.Explorer\src\Unisphere.Explorer.Api\Unisphere.Explorer.Api.csproj" />
     <ProjectReference Include="..\..\Unisphere.Gateway\src\Unisphere.Gateway.Api\Unisphere.Gateway.Api.csproj" />
+    <ProjectReference Include="..\..\Unisphere.Identity\src\Unisphere.Identity.Api\Unisphere.Identity.Api.csproj" />
   </ItemGroup>
 
 </Project>

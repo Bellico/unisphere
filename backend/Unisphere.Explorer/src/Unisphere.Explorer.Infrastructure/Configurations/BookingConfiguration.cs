@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Unisphere.Core.Common.Extensions;
 using Unisphere.Explorer.Domain;
 
-namespace Infrastructure.Todos;
+namespace Unisphere.Explorer.Infrastructure.Configurations;
 
 internal sealed class BookingConfiguration : IEntityTypeConfiguration<Booking>
 {

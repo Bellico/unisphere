@@ -5,7 +5,7 @@ using Unisphere.Explorer.Application.Models;
 
 namespace Unisphere.Explorer.Application.Queries;
 
-internal sealed class SearchHousesQueryHandler(IApplicationDbContext context) : IQueryHandler<SearchHousesQuery, IList<HouseModel>>
+internal sealed class SearchHousesQueryHandler(IExplorerDbContext context) : IQueryHandler<SearchHousesQuery, IList<HouseModel>>
 {
     public async Task<IList<HouseModel>> Handle(SearchHousesQuery command, CancellationToken cancellationToken)
     {

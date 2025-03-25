@@ -3,7 +3,7 @@ using Unisphere.Explorer.Domain;
 
 namespace Unisphere.Explorer.Application.Abstractions;
 
-public interface IApplicationDbContext
+public interface IExplorerDbContext
 {
     DbSet<Booking> Bookings { get; }
 

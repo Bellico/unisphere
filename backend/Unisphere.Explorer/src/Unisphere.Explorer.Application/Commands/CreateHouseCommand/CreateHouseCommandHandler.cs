@@ -6,7 +6,7 @@ using Unisphere.Explorer.Domain;
 
 namespace Unisphere.Explorer.Application.Commands;
 
-internal sealed class CreateHouseCommandHandler(IApplicationDbContext context, IUserContextService userContextService)
+internal sealed class CreateHouseCommandHandler(IExplorerDbContext context, IUserContextService userContextService)
     : ICommandHandler<CreateHouseCommand, Guid>
 {
     public async Task<ErrorOr<Guid>> Handle(CreateHouseCommand command, CancellationToken cancellationToken)

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.NpgSql" />
+    <PackageReference Include="EFCore.NamingConventions" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Unisphere.Core\src\Unisphere.Core.Common\Unisphere.Core.Common.csproj" />
+    <ProjectReference Include="..\..\..\Unisphere.Core\src\Unisphere.Core.Infrastructure\Unisphere.Core.Infrastructure.csproj" />
+    <ProjectReference Include="..\Unisphere.Identity.Application\Unisphere.Identity.Application.csproj" />
+  </ItemGroup>
+  
+</Project>

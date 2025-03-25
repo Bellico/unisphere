@@ -10,7 +10,7 @@ using Unisphere.Explorer.Infrastructure;
 
 namespace Unisphere.Explorer.Infrastructure.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(ExplorerDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

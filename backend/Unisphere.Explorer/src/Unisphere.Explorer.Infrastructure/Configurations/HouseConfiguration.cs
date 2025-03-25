@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Unisphere.Explorer.Domain;
 
-namespace Infrastructure.Todos;
+namespace Unisphere.Explorer.Infrastructure.Configurations;
 
 internal sealed class HouseConfiguration : IEntityTypeConfiguration<House>
 {

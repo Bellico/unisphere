@@ -29,7 +29,7 @@ app.MapGrpcService<ExplorerRpcService>();
 
 if (app.Environment.IsDevelopment())
 {
-    await app.Services.ConfigureDatabaseAsync<ApplicationDbContext>();
+    await app.Services.ConfigureDatabaseAsync<ExplorerDbContext>();
 }
 
 await app.RunAsync();

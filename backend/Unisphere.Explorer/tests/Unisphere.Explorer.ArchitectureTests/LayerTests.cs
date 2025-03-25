@@ -10,8 +10,8 @@ namespace Unisphere.Explorer.ArchitectureTests;
 public class LayerTests
 {
     protected static readonly Assembly DomainAssembly = typeof(House).Assembly;
-    protected static readonly Assembly ApplicationAssembly = typeof(IApplicationDbContext).Assembly;
-    protected static readonly Assembly InfrastructureAssembly = typeof(ApplicationDbContext).Assembly;
+    protected static readonly Assembly ApplicationAssembly = typeof(IExplorerDbContext).Assembly;
+    protected static readonly Assembly InfrastructureAssembly = typeof(ExplorerDbContext).Assembly;
     protected static readonly Assembly PresentationAssembly = typeof(ExplorerEndpoints).Assembly;
 
     [Fact]

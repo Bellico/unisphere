@@ -3,7 +3,7 @@ using Unisphere.Explorer.Application.Abstractions;
 
 namespace Unisphere.Explorer.Application.Services;
 
-public class UserDataScopeService(IApplicationDbContext dbContext) : IUserDataScopeService
+public class UserDataScopeService(IExplorerDbContext dbContext) : IUserDataScopeService
 {
     public Task<bool> IsUserOwnerHouseAsync(Guid userId, Guid houseId, CancellationToken cancellationToken)
     {
